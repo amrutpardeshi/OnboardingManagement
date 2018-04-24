@@ -1,0 +1,23 @@
+﻿
+@(Html.Kendo().Grid<OnboardingManagement.Models.Mentor>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.M_Name);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ToolBar(toolbar => {
+            toolbar.Create();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Pageable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.M_Id))
+          .Read(read => read.Action("Mentors_Read", "Mentor"))
+          .Create(create => create.Action("Mentors_Create", "Mentor"))
+          .Update(update => update.Action("Mentors_Update", "Mentor"))
+          .Destroy(destroy => destroy.Action("Mentors_Destroy", "Mentor"))
+      )
+)
