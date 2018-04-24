@@ -18,5 +18,6 @@ namespace OnboardingManagement.Models
         public DbSet<Onboarder> Onboarders { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectAssignment> ProjectAssignments { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
