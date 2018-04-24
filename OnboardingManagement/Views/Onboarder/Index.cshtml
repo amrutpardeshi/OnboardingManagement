@@ -1,0 +1,25 @@
+﻿
+@(Html.Kendo().Grid<OnboardingManagement.Models.Onboarder>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.O_Name);
+          columns.Bound(c => c.O_Rotation_Num);
+          columns.ForeignKey(c => c.RM_Id, (System.Collections.IEnumerable)ViewData["ReportingManager"], dataFieldText: "RM_Name", dataFieldValue: "RM_Id").Title("Reporting Manager");
+          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ToolBar(toolbar => {
+          toolbar.Create();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Pageable()
+      .Scrollable(scrollable => scrollable.Enabled(false))
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.O_Id))
+          .Read(read => read.Action("Onboarders_Read", "Onboarder"))
+          .Create(create => create.Action("Onboarders_Create", "Onboarder"))
+          .Update(update => update.Action("Onboarders_Update", "Onboarder"))
+          .Destroy(destroy => destroy.Action("Onboarders_Destroy", "Onboarder"))
+      )
+)

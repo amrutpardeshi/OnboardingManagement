@@ -1,0 +1,23 @@
+﻿
+@(Html.Kendo().Grid<OnboardingManagement.Models.ReportingManager>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.RM_Name);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ToolBar(toolbar => {
+            toolbar.Create();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Pageable()
+      .Scrollable(scrollable => scrollable.Enabled(false))
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.RM_Id))
+          .Read(read => read.Action("ReportingManagers_Read", "ReportingManager"))
+          .Create(create => create.Action("ReportingManagers_Create", "ReportingManager"))
+          .Update(update => update.Action("ReportingManagers_Update", "ReportingManager"))
+          .Destroy(destroy => destroy.Action("ReportingManagers_Destroy", "ReportingManager"))
+      )
+)
