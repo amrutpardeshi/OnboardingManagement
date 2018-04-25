@@ -22,11 +22,22 @@ namespace OnboardingManagement.Controllers
             return View();
         }
 
+        /// <summary>
+        /// To use text at foreign key
+        /// </summary>
         private void PopulateReportingManagers()
         {
             ViewData["ReportingManager"] = db.ReportingManagers;
         }
 
+        /// <summary>
+        /// To get all onboarders in dropdown list
+        /// </summary>
+        /// <returns>all onboarders in json</returns>
+        public JsonResult GetAllOnboarders()
+        {
+            return Json(db.Onboarders.ToList(), JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult Onboarders_Read([DataSourceRequest]DataSourceRequest request)
         {

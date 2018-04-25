@@ -21,6 +21,11 @@ namespace OnboardingManagement.Controllers
             return View();
         }
 
+        public JsonResult GetAllMentors()
+        {
+            return Json(db.Mentors.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Mentors_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<Mentor> mentors = db.Mentors;

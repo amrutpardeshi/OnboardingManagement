@@ -21,6 +21,15 @@ namespace OnboardingManagement.Controllers
             return View();
         }
 
+        /// <summary>
+        /// To get all projects in dropdown list
+        /// </summary>
+        /// <returns>all projects in json</returns>
+        public JsonResult GetAllProjects()
+        {
+            return Json(db.Projects.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Projects_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<Project> projects = db.Projects;
