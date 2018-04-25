@@ -1,0 +1,19 @@
+﻿
+@(Html.Kendo().Grid<OnboardingManagement.Models.ProjectAssignment>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.ForeignKey(c => c.O_Id, (System.Collections.IEnumerable)ViewData["Onboarders"], dataFieldText: "O_Name", dataFieldValue: "O_Id");
+          columns.ForeignKey(c => c.P_Id, (System.Collections.IEnumerable)ViewData["Projects"], dataFieldText: "P_Name", dataFieldValue: "P_Id");
+          columns.Bound(c => c.PA_Rotation_Num);
+          columns.ForeignKey(c => c.M_Id, (System.Collections.IEnumerable)ViewData["Mentors"], dataFieldText: "M_Name", dataFieldValue: "M_Id");
+          columns.Bound(c => c.PA_Start_Date);
+          columns.Bound(c => c.PA_End_Date).Width(180);
+      })
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.PA_Id))
+          .Read(read => read.Action("ProjectAssignments_Read", "ProjectAssignment"))
+
+      )
+)
