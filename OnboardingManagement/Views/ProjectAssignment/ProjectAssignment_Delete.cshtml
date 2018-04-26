@@ -1,0 +1,131 @@
+﻿<div class="form-group">
+    <div class="col-lg-7 col-lg-offset-4">
+        <div class="row">
+            <div class="col-lg-3">
+                @Html.Label("Select Onboarder:")
+            </div>
+            <div class="col-lg-3">
+                @(Html.Kendo().DropDownList()
+                           .Name("O_Id")
+                           .DataTextField("O_Name")
+                           .DataValueField("O_Id")
+                           .DataSource(source =>
+                           {
+                               source.Read(read =>
+                               {
+                                   read.Action("GetAllOnboarders", "Onboarder");
+                               });
+                           })
+                          .Filter("contains")
+                          .HtmlAttributes(new { style = "width: 100%" })
+                          .Events(e=>e.Change("getOnboarderId"))
+                )
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-lg-3">
+                @Html.Label("Enter Rotation Number")
+            </div>
+            <div class="col-lg-3">
+                @(Html.Kendo().NumericTextBox()
+                        .Name("PA_Rotation_Num")
+                        .Events(e => e.Change("getRotataionNo"))
+                )
+                
+            </div>
+        </div><br />
+
+        <div class="row">
+            <div class="col-lg-2">
+                
+            </div>
+            <div class="col-lg-3">
+                @(Html.Kendo().Button()
+                    .Name("textButton")
+                    .Content("Search")
+                    .Events(e=>e.Click("onClick"))
+                 )
+                    
+            </div>
+        </div><br />
+    </div>
+</div>
+<div class="form-group">
+    
+    <div class="row">
+        <div class="col-lg-offset-1 col-md-2">
+            Project Name
+            @Html.Kendo().TextBox().Name("p_name").Enable(false)
+        </div>
+        <div class="col-md-2 ">
+            Onboarder Name
+            @Html.Kendo().TextBox().Name("o_name").Enable(false)
+        </div>
+    
+        <div class="col-md-2">
+            Mentor Name
+            @Html.Kendo().TextBox().Name("m_name").Enable(false)
+        </div>
+        <div class="col-md-2">
+            Rotation Number
+            @Html.Kendo().TextBox().Name("r_no").Enable(false)
+        </div>
+        <div class="col-md-2">
+            @(Html.Kendo().Button().Name("deleteButton").Content("Delete")
+                    .Events(e => e.Click("onDeleteClick"))
+            )
+        </div>
+    </div>
+</div>
+<script>
+     
+    var o_id, o_rotationNo,pa_id;
+    function getOnboarderId() {
+        o_id = this.value();
+    }
+
+    function getRotataionNo() {
+        o_rotationNo = this.value();
+    }
+
+    function onClick()
+    {
+        $.ajax({
+            url: "/ProjectAssignment/ProjectAssignment_Delete_Fetch",
+            type: "POST",
+            data: JSON.stringify({ 'o_id': o_id, 'rotation_no': o_rotationNo }),
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $("#p_name").val(data.Project.P_Name);
+                $("#o_name").val(data.Onboarder.O_Name);
+                $("#m_name").val(data.Mentor.M_Name);
+                $("#r_no").val(data.Psn.PA_Rotation_Num);
+                pa_id = data.Psn.PA_Id;
+                debugger
+            },
+            error: function () {
+                alert("No record found for this onboarder !!!");
+            }
+        });
+    }
+
+    function onDeleteClick()
+    {
+        $.ajax({
+            url: "/ProjectAssignment/ProjectAssignment_Delete",
+            type: "POST",
+            data: JSON.stringify({ 'pa_id': pa_id }),
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                alert("SUCCESS"+data);
+            },
+            error: function (err) {
+                alert("No record found for this onboarder !!!"+err);
+            }
+        });
+    }
+</script>
