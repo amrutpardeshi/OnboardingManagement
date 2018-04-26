@@ -192,6 +192,7 @@
     <Content Include="Views\Onboarder\Index.cshtml" />
     <Content Include="Views\ProjectAssignment\Index.cshtml" />
     <Content Include="Views\ProjectAssignment\Create.cshtml" />
+    <Content Include="Views\ReportingManager\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

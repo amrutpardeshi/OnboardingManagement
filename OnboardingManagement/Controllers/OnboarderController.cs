@@ -15,11 +15,27 @@ namespace OnboardingManagement.Controllers
     public class OnboarderController : Controller
     {
         private OnboardingManagementDb db = new OnboardingManagementDb();
+        public ActionResult Add(Onboarder onboarder) {
+            onboarder.O_Rotation_Num = 1;
+            db.Onboarders.Add(onboarder);
+            db.SaveChanges();
+            return View("Index");
+        }
+        [HttpPost]
+        public ActionResult Update(String onboardId, String Onboard_Name, String ReportingManagerID) {
+            int oid = Convert.ToInt32(onboardId);
+            Onboarder onboarder = db.Onboarders.FirstOrDefault(m => m.O_Id == oid);
+            onboarder.RM_Id = Convert.ToInt32(ReportingManagerID);
+            onboarder.O_Name = Onboard_Name;
+            db.SaveChanges();
 
+            return View("Index");
+        }
         public ActionResult Index()
         {
+
             PopulateReportingManagers();
-            return View();
+            return View(new Onboarder());
         }
 
         /// <summary>
@@ -70,6 +86,13 @@ namespace OnboardingManagement.Controllers
             }
 
             return Json(new[] { onboarder }.ToDataSourceResult(request, ModelState));
+        }
+
+        [HttpPost]
+        public JsonResult getOnboarder(int id)
+        {
+            var result = db.Onboarders.FirstOrDefault(m => m.O_Id == id);
+            return Json(result);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

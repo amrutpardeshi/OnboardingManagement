@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-lg-3">
                     @(Html.Kendo().NumericTextBoxFor(p => Model.PA_Rotation_Num)
-                        .Name("PA_Rotation_Num")
+                        .Name("PA_Rotation_Num").Min(1).Max(4)
                     )
                 </div>
             </div><br />
@@ -114,6 +114,7 @@
         </div>
 </div>
 }
+
 
 @*@using (Html.BeginForm("Login", "Login", FormMethod.Post))
     {
