@@ -122,9 +122,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="App_Data\App_Start\BundleConfig.cs" />
-    <Compile Include="App_Data\App_Start\FilterConfig.cs" />
-    <Compile Include="App_Data\App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\MentorController.cs" />
     <Compile Include="Controllers\OnboarderController.cs" />
     <Compile Include="Controllers\ProjectAssignmentController.cs" />
@@ -217,12 +214,13 @@
     <Content Include="Views\Shared\_Toolbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Project\Update.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
