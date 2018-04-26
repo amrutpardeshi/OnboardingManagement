@@ -241,3 +241,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /OnboardingManagement/Views/ReportingManager/Test.cshtml
+/OnboardingManagement/Controllers/TestMentorController.cs
+/OnboardingManagement/Views/TestMentor/Index.cshtml
