@@ -1,0 +1,13 @@
+﻿<nav class="navbar navbar-inverse" style="margin-bottom:0">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            @Html.ActionLink("OnBoardManagement", "MView", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+       
+        <div class="nav navbar-nav navbar-right">
+            @*@Html.ActionLink("Sign Out("+ ViewData["uname"].ToString()+")", "LogOut", "Login", new { area = "" }, new { @class = "navbar-brand" })*@
+            @Html.ActionLink("Sign Out(" +HttpContext.Current.User.Identity.Name + ")", "LogOut", "Login", new { area = "" }, new { @class = "navbar-brand" })
+          </div>
+        </div>
+   
+</nav>

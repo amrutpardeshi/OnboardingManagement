@@ -1,0 +1,32 @@
+﻿@model OnboardingManagement.Models.User
+@{
+    ViewBag.Title = "Login";
+}
+<h2>Login</h2>
+
+
+<div class="row">
+    <div class="container text-center col-lg-offset-1" >
+        @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { ReturnUrl = Request["ReturnUrl"] }))
+        {
+
+            <div class="container text-center">
+                <div class="form-group  center-block">
+                    @Html.Label("Username")
+                    @Html.Kendo().TextBoxFor(m => @Model.U_Name)
+                </div>
+                <div class="form-group center-block">
+                    @Html.Label("Password")
+                    @Html.Kendo().TextBoxFor(m => @Model.U_Password).HtmlAttributes(new { type = "password" })
+                </div>
+                <input type="hidden" name="ReturnUrl" value="@Request.QueryString["ReturnUrl"]" />
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary" type="submit">Login</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
