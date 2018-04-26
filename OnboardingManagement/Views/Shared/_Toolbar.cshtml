@@ -1,0 +1,142 @@
+﻿<div>
+    @(Html.Kendo().ToolBar()
+                      .Name("ToolBar")
+                     .Items(items =>
+                     {
+                         items.Add().Type(CommandType.Separator);
+                         items.Add().Type(CommandType.SplitButton).Text("Mentor").Id("MentorButton").Click("MentorHandler").MenuButtons(menuButtons =>
+                         {
+                             menuButtons.Add().Text("View Mentor").Id("m_view");
+                             menuButtons.Add().Text("Add Mentor").Id("m_add");
+                             menuButtons.Add().Text("Update Mentor").Id("m_update");
+                             menuButtons.Add().Text("Delete Mentor").Id("m_delete");
+
+                         });
+
+                         items.Add().Type(CommandType.Separator);
+                         items.Add().Type(CommandType.Separator);
+
+                         items.Add().Type(CommandType.SplitButton).Text("OnBoarder").Id("OnBoarderButton").Click("OnBoarderHandler").MenuButtons(menuButtons =>
+                         {
+                             menuButtons.Add().Text("View OnBoarder").Id("o_view");
+                             menuButtons.Add().Text("Add OnBoarder").Id("o_add");
+                             menuButtons.Add().Text("Update OnBoarder").Id("o_update");
+                             menuButtons.Add().Text("Delete OnBoarder").Id("o_delete");
+
+                         });
+
+                         items.Add().Type(CommandType.Separator);
+                         items.Add().Type(CommandType.Separator);
+                         items.Add().Type(CommandType.SplitButton).Text("Project").Id("ProjectButton").Click("ProjectHandler").MenuButtons(menuButtons =>
+                         {
+                             menuButtons.Add().Text("View Project").Id("p_view");
+                             menuButtons.Add().Text("Add Project").Id("p_add");
+                             menuButtons.Add().Text("Update Project").Id("p_update");
+                             menuButtons.Add().Text("Delete Project").Id("p_delete");
+
+                         });
+
+                         items.Add().Type(CommandType.Separator);
+                         items.Add().Type(CommandType.Separator);
+                         items.Add().Type(CommandType.SplitButton).Text("Project Assigned").Id("Project_AButton").Click("P_AssignHandler").MenuButtons(menuButtons =>
+                         {
+                             menuButtons.Add().Text("View").Id("pa_view");
+                             menuButtons.Add().Text("Assign Project").Id("pa_add");
+                             menuButtons.Add().Text("Update Assigned Project").Id("pa_update");
+                             menuButtons.Add().Text("Delete Assigned Project").Id("pa_delete");
+
+                         });
+                     })
+    )
+
+</div>
+
+<script>
+    function MentorHandler(e)
+    {
+        if (e.id == "m_add")
+        {
+            var url = '@Url.Action("testView","Admin")';
+             window.location.href = url;
+
+        }
+        else if (e.id == "m_view")
+        {
+            var url = '@Url.Action("MView","Admin")';
+            window.location.href = url;
+        }
+
+        else if (e.id == "m_update") {
+            var url = '@Url.Action("MView","Admin")';
+            window.location.href = url;
+        }
+        else if (e.id == "m_delete") {
+            alert("Mentor: " + e.id + "is clicked");
+        }
+        else
+        {
+            alert("ERROR");
+        }
+    }
+
+
+    function OnBoarderHandler(e) {
+        if (e.id == "o_add") {
+             alert("OnBoarder: " + e.id + "is clicked");
+
+        }
+        else if (e.id == "o_view") {
+            alert("OnBoarder: " + e.id + "is clicked");
+        }
+
+        else if (e.id == "o_update") {
+            alert("OnBoarder: " + e.id + "is clicked");
+        }
+        else if (e.id == "o_delete") {
+            alert("OnBoarder: " + e.id + "is clicked");
+        }
+        else {
+            alert("ERROR");
+        }
+    }
+
+    function ProjectHandler(e) {
+        if (e.id == "p_add") {
+            alert("Project: " + e.id + "is clicked");
+
+        }
+        else if (e.id == "p_view") {
+            alert("Project: " + e.id + "is clicked");
+        }
+
+        else if (e.id == "p_update") {
+            alert("Project: " + e.id + "is clicked");
+        }
+        else if (e.id == "p_delete") {
+            alert("Project: " + e.id + "is clicked");
+        }
+        else {
+            alert("ERROR");
+        }
+    }
+
+    function P_AssignHandler(e) {
+        if (e.id == "pa_add") {
+            alert("ProjectAssigned: " + e.id + "is clicked");
+
+        }
+        else if (e.id == "pa_view") {
+            alert("ProjectAssigned: " + e.id + "is clicked");
+        }
+
+        else if (e.id == "pa_update") {
+            alert("ProjectAssigned: " + e.id + "is clicked");
+        }
+        else if (e.id == "pa_delete") {
+            alert("ProjectAssigned: " + e.id + "is clicked");
+        }
+        else {
+            alert("ERROR");
+        }
+    }
+</script>

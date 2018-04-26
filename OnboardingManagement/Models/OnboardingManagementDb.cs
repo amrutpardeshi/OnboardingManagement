@@ -12,12 +12,17 @@ namespace OnboardingManagement.Models
         {
 
         }
-        public DbSet<User> Users { get; set; }
+
         public DbSet<ReportingManager> ReportingManagers { get; set; }
+
+    
         public DbSet<Mentor> Mentors { get; set; }
         public DbSet<Onboarder> Onboarders { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectAssignment> ProjectAssignments { get; set; }
-      
+        public DbSet<User> Users { get; set; }
+       
+        public DbSet<Login_user> Login { get; set; }
+
     }
 }

@@ -47,7 +47,6 @@ namespace OnboardingManagement.Controllers
             {
                 ViewBag.msg = "Assignment of same project to onboarder";
                 return View("Index");
-                //return JavaScript("window.alert('Assignment of same project to onboarder');location.reload();"); //return JavaScript("<script>alert(\"some message\")</script>");
             }
         }
         public void PopulateForeignKeys()
@@ -110,32 +109,40 @@ namespace OnboardingManagement.Controllers
         }
 
         [HttpPost]
+        public void ProjectAssignment_Delete(int id)
+        {
+
+        }
+
+        [HttpPost]
         public JsonResult ProjectAssignment_Delete_Fetch(string o_id,string rotation_no)
         {
             int id1 = Int32.Parse(o_id), rotation = Int32.Parse(rotation_no);
             ProjectAssignment projectAssignmet = db.ProjectAssignments.FirstOrDefault(m => m.O_Id == id1 &&  m.PA_Rotation_Num == rotation);
-            TempProjectAssignment tpa = new TempProjectAssignment
+            if (projectAssignmet != null)
             {
-                PA_Id = id1,
-                ProjectName = db.Projects.Find(projectAssignmet.P_Id).P_Name,
-                OnboarderName= db.Onboarders.Find(projectAssignmet.P_Id).O_Name,
-                RotationNo= projectAssignmet.PA_Rotation_Num,
-                MentorName = db.Mentors.Find(projectAssignmet.P_Id).M_Name,
-                StartData = projectAssignmet.PA_Start_Date,
-                EndData= projectAssignmet.PA_Start_Date
-            };
-            return Json(tpa, JsonRequestBehavior.AllowGet);
+                TempProjectAssignment tpa = new TempProjectAssignment
+                {
+                    PA_Id = id1,
+                    Project = db.Projects.Find(projectAssignmet.P_Id),
+                    Onboarder = db.Onboarders.Find(projectAssignmet.O_Id),
+                    Mentor = db.Mentors.Find(projectAssignmet.M_Id),
+                    Psn = projectAssignmet
+                };
+                return Json(tpa, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
         }
-
     }
     class TempProjectAssignment
     {
         public int PA_Id { get; set; }
-        public string ProjectName { get; set; }
-        public string OnboarderName { get; set; }
-        public int RotationNo { get; set; }
-        public string MentorName { get; set; }
-        public DateTime StartData { get; set; }
-        public DateTime EndData { get; set; }
+        public Project Project;
+        public Onboarder Onboarder;
+        public Mentor Mentor;
+        public ProjectAssignment Psn;
     };
 }
