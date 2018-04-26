@@ -1,0 +1,115 @@
+﻿@model  OnboardingManagement.Models.Project
+ @{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update</h2>
+
+<script>
+    function getProject() {
+        $.ajax({
+
+            url: "/Project/getProjectById",
+            type: "POST",
+            data: JSON.stringify({ 'id': this.value() }),
+            datatype: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+            alert(JSON.stringify(data))
+                
+                debugger
+            
+
+                 $("#P_Name").val(data.P_Name);
+
+                $("#P_Technology").val(data.P_Technology);
+
+            },
+            error: function () {
+                alert("An error has occured!!!");
+            }
+
+
+
+        })
+    }
+
+</script>
+
+@using (Html.BeginForm("Projects_Update", "Project", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="row">
+                <div class="col-lg-3">
+                    @Html.Label("Select Project:")
+                </div>
+                <div class="col-lg-3">
+                   
+    @(Html.Kendo().DropDownListFor(p => Model.P_Id)
+               .Name("P_Id")
+               .DataTextField("P_Name")
+               .DataValueField("P_Id")
+               
+               .DataSource(source =>
+               {
+                   source.Read(read =>
+                   {
+                       read.Action("GetAllProjects", "Project");
+                   });
+               })
+              .Filter("contains")
+              .HtmlAttributes(new { style = "width: 100%" })
+              .Events(e => e.Change("getProject"))
+             
+
+        )
+
+            </div>
+            </div><br />
+
+            <div class="row">
+                <div class="col-lg-3">
+                    @Html.Label("Project Name")
+
+                 </div>
+                <div class="col-lg-3">
+                    @Html.Kendo().TextBoxFor(m=> Model.P_Name).Name("P_Name")
+
+                </div>
+
+                
+
+            </div><br/>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    @Html.Label("Project Technology")
+                </div>
+               
+             <div class="col-lg-3">
+                    @Html.Kendo().TextBoxFor(m => Model.P_Technology).Name("P_Technology")
+
+                </div>
+
+
+
+            </div><br />
+
+
+            <div class="row">
+                <div class="col-lg-3">
+
+                </div>
+                <div class="col-lg-3">
+                    <button class="btn btn-lg btn-primary" type="submit">Update</button>
+
+                </div>
+            </div><br />
+
+            </div>
+        </div>
+}
+
+<a href="http://google.com" class="btn btn-default">Go to Google</a>

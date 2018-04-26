@@ -20,7 +20,27 @@ namespace OnboardingManagement.Controllers
         {
             return View();
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
+     
 
+        public ActionResult Update()
+        {
+            return View();
+        }
+        /// <summary>
+        /// To get a selected projects in textbox list
+        ///</summary>
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult getProjectById(int id)
+        {
+            var project = (from d in db.Projects
+                          where d.P_Id == id
+                          select d).FirstOrDefault(); 
+            return Json(project, JsonRequestBehavior.AllowGet);
+        }
         /// <summary>
         /// To get all projects in dropdown list
         /// </summary>
@@ -32,7 +52,7 @@ namespace OnboardingManagement.Controllers
 
         public ActionResult Projects_Read([DataSourceRequest]DataSourceRequest request)
         {
-            IQueryable<Project> projects = db.Projects;
+          var projects = db.Projects.ToList();
             DataSourceResult result = projects.ToDataSourceResult(request, project => new {
                 P_Id = project.P_Id,
                 P_Name = project.P_Name,
@@ -42,8 +62,13 @@ namespace OnboardingManagement.Controllers
             return Json(result);
         }
 
+
+        /// <summary>
+        /// To add the new Project
+        /// </summary>
+       
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Projects_Create([DataSourceRequest]DataSourceRequest request, Project project)
+        public ActionResult Create([DataSourceRequest]DataSourceRequest request, Project project)
         {
             if (ModelState.IsValid)
             {
@@ -56,9 +81,12 @@ namespace OnboardingManagement.Controllers
                 db.Projects.Add(entity);
                 db.SaveChanges();
                 project.P_Id = entity.P_Id;
+
+                return View();
             }
 
-            return Json(new[] { project }.ToDataSourceResult(request, ModelState));
+            return View("/Project/Index");
+          
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

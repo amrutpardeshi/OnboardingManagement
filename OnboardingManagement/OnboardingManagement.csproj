@@ -194,11 +194,16 @@
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
-    <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Mentor\Index.cshtml" />
     <Content Include="Views\ReportingManager\Index.cshtml" />
     <Content Include="Views\Onboarder\Index.cshtml" />
     <Content Include="Views\ProjectAssignment\Index.cshtml" />
+    <Content Include="Views\ProjectAssignment\Create.cshtml" />
+    <Content Include="Views\ReportingManager\Test.cshtml" />
+    <Content Include="Views\Onboarder\_AddOnboarder.cshtml" />
+    <Content Include="Views\Onboarder\_UpdateOnBoarder.cshtml" />
+    <Content Include="Views\Onboarder\_DeleteOnboarder.cshtml" />
+    <Content Include="Views\Onboarder\_ViewOnboarders.cshtml" />
     <Content Include="Views\ProjectAssignment\DisplayAllAssignments.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\MentorView.cshtml" />
@@ -208,6 +213,11 @@
     <Content Include="Views\Shared\_HeadNavBar.cshtml" />
     <Content Include="Views\Shared\_Toolbar.cshtml" />
     <Content Include="Views\ProjectAssignment\ProjectAssignment_Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Project\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
