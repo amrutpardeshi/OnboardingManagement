@@ -1,0 +1,134 @@
+﻿<div class="form-group">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="row">
+            <div class="col-lg-3">
+                @Html.Label("Select Onboarder:")
+            </div>
+            <div class="col-lg-3">
+                @(Html.Kendo().DropDownList()
+                           .Name("O_Id")
+                           .DataTextField("O_Name")
+                           .DataValueField("O_Id")
+                           .DataSource(source =>
+                           {
+                               source.Read(read =>
+                               {
+                                   read.Action("GetAllOnboarders", "Onboarder");
+                               });
+                           })
+                          .Filter("contains")
+                          .HtmlAttributes(new { style = "width: 100%" })
+                          .Events(e=>e.Change("getOnboarderId"))
+                )
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                @Html.Label("Enter Rotation Number")
+            </div>
+            <div class="col-lg-3">
+                @(Html.Kendo().NumericTextBox()
+                        .Name("PA_Rotation_Num")
+                        .Events(e => e.Change("getRotataionNo"))
+                )
+                
+            </div>
+        </div><br />
+
+        <div class="row">
+            <div class="col-lg-2">
+                
+            </div>
+            <div class="col-lg-3">
+                @(Html.Kendo().Button()
+                    .Name("textButton")
+                    .Content("Search")
+                    .Events(e=>e.Click("onClick"))
+                 )
+                    
+            </div>
+        </div><br />
+    </div>
+</div>
+
+<div id="result">
+    
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2">
+            Project Name
+        </div>
+        <div class="col-lg-2">
+            Onboarder Name
+        </div>
+        <div class="col-lg-2">
+            Mentor Name
+        </div>
+        <div class="col-lg-2">
+            Rotation Number
+        </div>
+        <div class="col-lg-2">
+            Start Date
+        </div>
+        <div class="col-lg-2">
+            End Date
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            @Html.Kendo().TextBox().Name("p_name")
+        </div>
+        <div class="col-lg-2">
+            @Html.Kendo().TextBox().Name("o_name")
+        </div>
+        <div class="col-lg-2">
+            @Html.Kendo().TextBox().Name("m_name")
+        </div>
+        <div class="col-lg-2">
+            @Html.Kendo().TextBox().Name("r_no")
+        </div>
+        <div class="col-lg-2">
+            @Html.Kendo().TextBox().Name("st_date")
+        </div>
+        <div class="col-lg-2">
+            @Html.Kendo().TextBox().Name("ed_date")
+        </div>
+    </div>
+</div>
+<script>
+     
+    var o_id, o_rotationNo;
+    function getOnboarderId() {
+        o_id = this.value();
+    }
+
+    function getRotataionNo() {
+        o_rotationNo = this.value();
+    }
+
+    function onClick()
+    {
+        
+        $.ajax({
+            url: "/ProjectAssignment/ProjectAssignment_Delete_Fetch",
+            type: "POST",
+            data: JSON.stringify({ 'o_id': o_id, 'rotation_no': o_rotationNo }),
+            //data: '{"o_id":"' + o_id + '","o_rotationNo":"' + o_rotationNo + '"}',
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $("#p_name").val(data.ProjectName);
+                $("#o_name").val(data.OnboarderName);
+                $("#m_name").val(data.MentorName);
+                $("#r_no").val(data.RotationNo);
+                $("#st_date").val(data.StartData);
+                $("#st_date").val(data.EndData);
+            },
+            error: function () {
+                alert("No record found for this onboarder !!!");
+            }
+        });
+    }
+</script>

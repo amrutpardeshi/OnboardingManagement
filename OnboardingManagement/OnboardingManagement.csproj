@@ -192,6 +192,7 @@
     <Content Include="Views\Onboarder\Index.cshtml" />
     <Content Include="Views\ProjectAssignment\Index.cshtml" />
     <Content Include="Views\ProjectAssignment\DisplayAllAssignments.cshtml" />
+    <Content Include="Views\ProjectAssignment\ProjectAssignment_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
