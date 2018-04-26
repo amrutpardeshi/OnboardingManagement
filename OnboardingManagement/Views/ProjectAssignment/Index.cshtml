@@ -1,5 +1,10 @@
 ﻿@model OnboardingManagement.Models.ProjectAssignment
-
+<div>
+    @Html.Partial("_HeadNavBar")
+</div>
+<div>
+    @Html.Partial("_Toolbar")
+</div>
 @using (Html.BeginForm("Create", "ProjectAssignment", FormMethod.Post))
 {
     <div class="form-group">

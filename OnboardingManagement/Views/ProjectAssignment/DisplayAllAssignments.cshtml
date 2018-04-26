@@ -1,4 +1,9 @@
-﻿
+﻿<div>
+    @Html.Partial("_HeadNavBar")
+</div>
+<div>
+    @Html.Partial("_Toolbar")
+</div>
 @(Html.Kendo().Grid<OnboardingManagement.Models.ProjectAssignment>()
       .Name("grid")
       .Columns(columns =>
