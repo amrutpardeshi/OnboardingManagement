@@ -193,6 +193,10 @@
     <Content Include="Views\ProjectAssignment\Index.cshtml" />
     <Content Include="Views\ProjectAssignment\Create.cshtml" />
     <Content Include="Views\ReportingManager\Test.cshtml" />
+    <Content Include="Views\Onboarder\_AddOnboarder.cshtml" />
+    <Content Include="Views\Onboarder\_UpdateOnBoarder.cshtml" />
+    <Content Include="Views\Onboarder\_DeleteOnboarder.cshtml" />
+    <Content Include="Views\Onboarder\_ViewOnboarders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

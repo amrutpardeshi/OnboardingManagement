@@ -32,41 +32,11 @@
     <div class="row">
 
         @*Add onboarder Form*@
-        <div class="col-sm-4">
-            @using (Html.BeginForm("Add", "Onboarder"))
-            { 
-                <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-8"><h3>New Onboarder</h3></div>
-                </div>
-           
-                <div class="row">
-                    <div class="col-sm-6"><h4>@Html.Label("OnBoarder Name")</h4></div>
-                    <div class="col-sm-6">@Html.Kendo().TextBoxFor(m => Model.O_Name)</div>              
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6"><h4>@Html.Label("Reporting Manager:")</h4></div>
-                    <div class="col-sm-6">@(Html.Kendo().DropDownListFor(p => Model.O_Id)
-                               .Name("RM_Id")
-                               .DataTextField("RM_Name")
-                               .DataValueField("RM_Id")
-                               .DataSource(source =>
-                               {
-                                   source.Read(read =>
-                                   {
-                                       read.Action("GetAllReportingManager", "ReportingManager");
-                                   });
-                               })
-                              .Filter("contains")
-                              .HtmlAttributes(new { style = "width: 100%" })
-                    )</div>
-                    <div class="row">
-                        <div class="col-sm-6"> </div>
-                        <div class="col-sm-6 content"><button class="btn btn-lg btn-primary" type="submit">Add</button></div>
-                    </div>
-                </div>
-            }
+        <div class="col-sm-4" style="background-color:lemonchiffon;">
+            
+               
+                @Html.Partial("_AddOnboarder")
+            
 
         </div>
         @*End of First Coloumn of first row*@
@@ -77,70 +47,7 @@
         <div class="col-sm-4" style="background-color:lavenderblush;">
         
             
-            <div class="row">
-                <div class="col-sm-3"></div>
-                <div class="col-sm-8"><h3>Change Onboarder Info</h3></div>
-            </div>
-          
-            @*Dropdown to select onboarder which is to be updated*@
-            <div class="row">
-                <div class="col-sm-3"><h4>@Html.Label("Select Onboarder")</h4></div>
-                <div class="col-sm-8">@(Html.Kendo().DropDownListFor(p => Model.O_Id)
-                           .Name("O_Id")
-                           .DataTextField("O_Name")
-                           .DataValueField("O_Id")
-                           .DataSource(source =>
-                           {
-                               source.Read(read =>
-                               {
-                                   read.Action("GetAllOnboarders", "Onboarder");
-                               });
-                           })
-                          .Filter("contains")
-                          .HtmlAttributes(new { style = "width: 100%" }).Events(e => e.Change("getStudent"))
-                )</div>
-            </div>
-
-            @using (Html.BeginForm("Update", "Onboarder"))
-            {
-                <div class="row">
-                    <div class="col-sm-3"><h4>@Html.Label("OnBoarder Id")</h4></div>
-                    <div class="col-sm-8">@Html.Kendo().TextBox().Name("onboardId").Enable(false)</div>
-                </div>
-
-                @*Edit Box for Onboarder Name*@
-                <div class="row">
-                    <div class="col-sm-3"><h4>@Html.Label("OnBoarder Name")</h4></div>
-                    <div class="col-sm-8">@Html.Kendo().TextBox().Name("Onboard_Name")</div>
-                </div>
-                
-                @*Dropdown to select new Reporting manager *@
-                <div class="row">
-                        <div class="col-sm-6"><h4>@Html.Label("Reporting Manager:")</h4></div>
-                        <div class="col-sm-6">
-                           @(Html.Kendo().DropDownListFor(p => Model.O_Id)
-                               .Name("ReportingManagerID")
-                               .DataTextField("RM_Name")
-                               .DataValueField("RM_Id")
-                               .DataSource(source =>
-                               {
-                                   source.Read(read =>
-                                   {
-                                       read.Action("GetAllReportingManager", "ReportingManager");
-                                   });
-                               })
-                              .Filter("contains")
-                              .HtmlAttributes(new { style = "width: 100%" })
-                        )
-                    </div>
-               
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-8"><button class="btn btn-lg btn-primary" type="submit">Change</button></div>
-                </div>
-            }
+           @Html.Partial("_UpdateOnboarder")
 
 
         </div>
@@ -148,7 +55,7 @@
 
 
         <div class="col-sm-4" style="background-color:lavender;">
-           
+           @Html.Partial("_DeleteOnboarder")
            
         </div>
         @*End of Third colmn of first row*@

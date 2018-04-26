@@ -31,6 +31,17 @@ namespace OnboardingManagement.Controllers
 
             return View("Index");
         }
+        public ActionResult Delete(String OnboardID)
+        {
+
+            int oid = Convert.ToInt32(OnboardID);
+            Onboarder onboarder = db.Onboarders.FirstOrDefault(m => m.O_Id == oid);
+            db.Onboarders.Remove(onboarder);
+            db.SaveChanges();
+            return View("Index");
+        }
+
+        
         public ActionResult Index()
         {
 
@@ -54,7 +65,7 @@ namespace OnboardingManagement.Controllers
         {
             return Json(db.Onboarders.ToList(), JsonRequestBehavior.AllowGet);
         }
-
+        
         public ActionResult Onboarders_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<Onboarder> onboarders = db.Onboarders;
