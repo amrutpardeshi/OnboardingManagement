@@ -21,6 +21,21 @@ namespace OnboardingManagement.Controllers
             return View();
         }
 
+        public ActionResult Test()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult GetReportingManagerById(int id)
+        {
+            ReportingManager reportingManager = db.ReportingManagers.FirstOrDefault(m => m.RM_Id == id);
+            return Json(reportingManager,JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetAllReportingManager()
+        {
+            return Json(db.ReportingManagers.ToList(), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ReportingManagers_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<ReportingManager> reportingmanagers = db.ReportingManagers;

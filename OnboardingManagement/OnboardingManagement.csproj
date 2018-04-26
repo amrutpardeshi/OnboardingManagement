@@ -117,6 +117,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="App_Data\App_Start\BundleConfig.cs" />
     <Compile Include="App_Data\App_Start\FilterConfig.cs" />
     <Compile Include="App_Data\App_Start\RouteConfig.cs" />
@@ -128,7 +133,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804260643022_Initial.cs" />
+    <Compile Include="Migrations\201804260643022_Initial.Designer.cs">
+      <DependentUpon>201804260643022_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Login_user.cs" />
     <Compile Include="Models\Mentor.cs" />
     <Compile Include="Models\Onboarder.cs" />
     <Compile Include="Models\OnboardingManagementDb.cs" />
@@ -136,6 +146,7 @@
     <Compile Include="Models\ProjectAssignment.cs" />
     <Compile Include="Models\ReportingManager.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="MyRoleProvider\SiteRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +202,22 @@
     <Content Include="Views\Onboarder\Index.cshtml" />
     <Content Include="Views\ProjectAssignment\Index.cshtml" />
     <Content Include="Views\ProjectAssignment\Create.cshtml" />
+    <Content Include="Views\ReportingManager\Test.cshtml" />
+    <Content Include="Views\Onboarder\_AddOnboarder.cshtml" />
+    <Content Include="Views\Onboarder\_UpdateOnBoarder.cshtml" />
+    <Content Include="Views\Onboarder\_DeleteOnboarder.cshtml" />
+    <Content Include="Views\Onboarder\_ViewOnboarders.cshtml" />
+    <Content Include="Views\ProjectAssignment\DisplayAllAssignments.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\MentorView.cshtml" />
+    <Content Include="Views\Admin\MView.cshtml" />
+    <Content Include="Views\Admin\testView.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Shared\_HeadNavBar.cshtml" />
+    <Content Include="Views\Shared\_Toolbar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
     <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Project\Update.cshtml" />
@@ -198,6 +225,11 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804260643022_Initial.resx">
+      <DependentUpon>201804260643022_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

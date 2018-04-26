@@ -1,25 +1,100 @@
-﻿
-@(Html.Kendo().Grid<OnboardingManagement.Models.Onboarder>()
-      .Name("grid")
-      .Columns(columns =>
-      {
-          columns.Bound(c => c.O_Name);
-          columns.Bound(c => c.O_Rotation_Num);
-          columns.ForeignKey(c => c.RM_Id, (System.Collections.IEnumerable)ViewData["ReportingManager"], dataFieldText: "RM_Name", dataFieldValue: "RM_Id").Title("Reporting Manager");
-          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
-      })
-      .ToolBar(toolbar => {
-          toolbar.Create();
-      })
-      .Editable(editable => editable.Mode(GridEditMode.InLine))
-      .Pageable()
-      .Scrollable(scrollable => scrollable.Enabled(false))
-      .DataSource(dataSource => dataSource
-          .Ajax()
-          .Model(model => model.Id(p => p.O_Id))
-          .Read(read => read.Action("Onboarders_Read", "Onboarder"))
-          .Create(create => create.Action("Onboarders_Create", "Onboarder"))
-          .Update(update => update.Action("Onboarders_Update", "Onboarder"))
-          .Destroy(destroy => destroy.Action("Onboarders_Destroy", "Onboarder"))
-      )
-)
+﻿@model OnboardingManagement.Models.Onboarder
+<script>
+    
+    function getStudent(){
+        debugger;
+        $.ajax({
+            url: "/Onboarder/getOnboarder",
+            type: "POST",
+            data: JSON.stringify({ 'id': this.value()}),
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                //alert(JSON.stringify(data))
+                debugger
+                $("#onboardId").val(data.O_Id).change();
+
+                $("#Onboard_Name").val(data.O_Name);
+
+            },
+            error: function () {
+                alert("An error has occured!!!");
+            }
+        });          
+    }
+
+  
+    
+</script>
+<div class="container-fluid">
+    <h1>OnBoarders</h1>
+    <div class="row">
+
+        @*Add onboarder Form*@
+        <div class="col-sm-4" style="background-color:lemonchiffon;">
+            
+               
+                @Html.Partial("_AddOnboarder")
+            
+
+        </div>
+        @*End of First Coloumn of first row*@
+
+        
+        
+        @*Update onboarder form*@
+        <div class="col-sm-4" style="background-color:lavenderblush;">
+        
+            
+           @Html.Partial("_UpdateOnboarder")
+
+
+        </div>
+        @*End of Second coloumn of first row*@
+
+
+        <div class="col-sm-4" style="background-color:lavender;">
+           @Html.Partial("_DeleteOnboarder")
+           
+        </div>
+        @*End of Third colmn of first row*@
+    </div>
+    @*End of first Row*@
+</div>
+
+
+
+
+
+
+
+
+
+
+
+@*@(Html.Kendo().Grid<OnboardingManagement.Models.Onboarder>()
+          .Name("grid")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.O_Name);
+              columns.Bound(c => c.O_Rotation_Num);
+              columns.ForeignKey(c => c.RM_Id, (System.Collections.IEnumerable)ViewData["ReportingManager"], dataFieldText: "RM_Name", dataFieldValue: "RM_Id").Title("Reporting Manager");
+              columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+          })
+          .ToolBar(toolbar => {
+              toolbar.Create();
+          })
+          .Editable(editable => editable.Mode(GridEditMode.InLine))
+          .Pageable()
+          .Scrollable(scrollable => scrollable.Enabled(false))
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .Model(model => model.Id(p => p.O_Id))
+              .Read(read => read.Action("Onboarders_Read", "Onboarder"))
+              .Create(create => create.Action("Onboarders_Create", "Onboarder"))
+              .Update(update => update.Action("Onboarders_Update", "Onboarder"))
+              .Destroy(destroy => destroy.Action("Onboarders_Destroy", "Onboarder"))
+          )
+    )
+*@
