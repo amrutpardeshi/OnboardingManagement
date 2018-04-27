@@ -30,6 +30,15 @@ namespace OnboardingManagement.Controllers
 
             return View();
         }
+        public String GetProjectNameById(int ProjectId)
+        {
+            return db.Projects.FirstOrDefault(m => m.P_Id == ProjectId).P_Name;
+        }
+
+        public String GetOnboarderNameById(int OnboarderId)
+        {
+            return db.Onboarders.FirstOrDefault(m => m.O_Id == OnboarderId).O_Name;
+        }
 
         [Authorize]
         public ActionResult MentorView(int id)
@@ -51,16 +60,35 @@ namespace OnboardingManagement.Controllers
 
                 List<ProjectAssignment> onboarderProject = db.ProjectAssignments.Where(m => m.O_Id == project.O_Id).ToList();//get all projects of onboarder
                 
-                
-                     
-                
-              
+                    foreach(ProjectAssignment onboarderdetail in onboarderProject)
+                    {
+                            model.Name = GetOnboarderNameById(onboarderdetail.O_Id);
+                            String projectName = GetProjectNameById(onboarderdetail.P_Id);
+                            if (model.Rotation1.Equals("---")) {
+                                model.Rotation1 = projectName;
+                            }
+                            else if (model.Rotation2.Equals("---"))
+                            {
+                                model.Rotation2 = projectName;
+                            }
+                            else if (model.Rotation3.Equals("---"))
+                            {
+                                model.Rotation3 = projectName;
+                            }
+                            else if (model.Rotation4.Equals("---"))
+                            {
+                                model.Rotation4 = projectName;
+                            }
+                }
+
+
+                onboarderslist.Add(model);
 
 
             }
 
 
-            return View();
+            return View(onboarderslist);
         }
 
     }
