@@ -25,7 +25,7 @@ namespace OnboardingManagement.Controllers
                 string role =usr.U_Role;
                 if (role.Equals("Mentor"))
                 {
-                    return RedirectToAction("MentorView", "Admin",new { id=usr.U_Id});
+                    return RedirectToAction("MentorView", "Admin",new { id=usr.M_Id});
                 }
                 else
                 {

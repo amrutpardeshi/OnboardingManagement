@@ -127,6 +127,7 @@
     <Compile Include="Controllers\ProjectAssignmentController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ReportingManagerController.cs" />
+    <Compile Include="Controllers\TestMentorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -214,6 +215,8 @@
     <Content Include="Views\Shared\_Toolbar.cshtml" />
     <Content Include="Views\ProjectAssignment\ProjectAssignment_Delete.cshtml" />
     <Content Include="Views\Project\Delete.cshtml" />
+    <Content Include="Views\TestMentor\Index.cshtml" />
+    <Content Include="Views\TestMentor\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Project\Create.cshtml" />

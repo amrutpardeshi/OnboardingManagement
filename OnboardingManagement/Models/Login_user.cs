@@ -17,5 +17,7 @@ namespace OnboardingManagement.Models
         [Required]
         public string U_Password { get; set; }
         public string U_Role { get; set; }
+        public int M_Id { get; set; }
+
     }
 }

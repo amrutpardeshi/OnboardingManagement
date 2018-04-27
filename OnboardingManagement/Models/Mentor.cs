@@ -14,6 +14,7 @@ namespace OnboardingManagement.Models
 
         //Foreign Keys
         public ICollection<ProjectAssignment> ProjectAssignments { get; set; }
+        public ICollection<Login_user> Login_users { get; set; }
 
     }
 }
