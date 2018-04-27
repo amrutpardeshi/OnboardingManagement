@@ -1,0 +1,50 @@
+﻿
+
+@model OnboardingManagement.Models.Mentor
+<div>@Html.Partial("_HeadNavBar")</div>
+<div>@Html.Partial("_Toolbar")</div>
+@using (Html.BeginForm("Create", "TestMentor", FormMethod.Post))
+{
+    <center>
+        <div class="form-group">
+
+            <h3 style="color:darkblue ;font-style:oblique"> Create Mentor</h3><br/>
+            <br/>
+            <div class="col-lg-6 col-lg-offset-3" style="background-color:lemonchiffon ; border:groove;" >
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <br/><br/><br /><br />
+
+
+                        @Html.Label("Mentor: Name")
+                    </div>
+                    <div class="col-lg-3">
+                        <br /><br /><br /><br />
+                        @Html.Kendo().TextBoxFor(m => Model.M_Name)
+
+
+                    </div>
+                </div><br />
+
+              
+
+                <div class="row">
+                    <div class="col-lg-3">
+
+                    </div>
+                    <div class="col-lg-3">
+                        <button class="btn btn-lg btn-primary" type="submit">Create</button>
+                        
+                    </div>
+                </div><br />
+            </div>
+
+        </div>
+    </center>
+}
+
+
+
+
+

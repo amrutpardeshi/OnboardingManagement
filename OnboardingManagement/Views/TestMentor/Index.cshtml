@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@(Html.Kendo().Grid<OnboardingManagement.Models.Mentor>()
+                .Name("Grid")
+                .Columns(columns => {
+                    columns.Bound(c => c.M_Id);
+                    columns.Bound(c => c.M_Name);
+                })
+                .Pageable()
+                .Scrollable()
+                .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(10)
+                .Read(read=>read.Action("GetAllMentors", "TestMentor"))
+                )
+    )
+
+
+
+     
+
