@@ -1,7 +1,6 @@
 ﻿
 
-<a href="/Project/Create" class="btn btn-success">Add Project</a>
-<a href="/Project/Update" class="btn btn-warning">Edit</a>
+
 <br/><br/>
 
 
@@ -10,9 +9,9 @@
       .Name("grid")
       .Columns(columns =>
       {
-          columns.Bound(c => c.P_Name);
-          columns.Bound(c => c.P_Technology);
-          columns.Command(command => { command.Destroy(); }).Width(180);
+          columns.Bound(c => c.P_Name).Title("Project Name");
+          columns.Bound(c => c.P_Technology).Title("Technology");
+          
          
       })
       .Scrollable()
@@ -21,7 +20,7 @@
           .Ajax()
            .Model(model => model.Id(p => p.P_Id))
           .Read(read => read.Action("Projects_Read", "Project"))
-           .Destroy(destroy => destroy.Action("Projects_Destroy", "Project"))
+           
 
       )
      

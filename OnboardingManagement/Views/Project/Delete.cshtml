@@ -1,6 +1,7 @@
-﻿@model  OnboardingManagement.Models.Project
- @{
-    ViewBag.Title = "Update";
+﻿
+@model  OnboardingManagement.Models.Project
+@{
+    ViewBag.Title = "Delete";
 }
 
 
@@ -17,9 +18,9 @@
             contentType: "application/json; charset=utf-8",
             success: function (data) {
             alert(JSON.stringify(data))
-                
+
                 debugger
-            
+
 
                  $("#P_Name").val(data.P_Name);
 
@@ -37,21 +38,23 @@
 
 </script>
 
-@using (Html.BeginForm("Projects_Update", "Project", FormMethod.Post))
+@using (Html.BeginForm("Delete", "Project", FormMethod.Post))
 {
     <center>
         <div class="form-group">
-            <h3 style="color:darkblue ;font-style:oblique"> Update Project Details</h3><br />
-            <div class="col-lg-6 col-lg-offset-3" style="background-color:lemonchiffon ; border:groove;">
-                <div class="row">
+            <h3> Delete Project Details</h3><br />
+
+            <div class="col-lg-6 col-lg-offset-3 " style="border:groove;background-color:lightslategrey">
+                <div class="row" style="align-content:center">
                     <div class="col-lg-3">
                         <br /><br /><br /><br />
                         @Html.Label("Select Project:")
                     </div>
                     <div class="col-lg-3">
                         <br /><br /><br /><br />
+
                         @(Html.Kendo().DropDownListFor(p => Model.P_Id)
-               .Name("P_Id")
+               .Name("ProjectId")
                .DataTextField("P_Name")
                .DataValueField("P_Id")
 
@@ -106,13 +109,14 @@
 
                     </div>
                     <div class="col-lg-3">
-                        <button class="btn btn-lg btn-warning" type="submit">Update</button>
+                        <button class="btn btn-lg btn-danger" type="submit">Delete</button>
 
                     </div>
                 </div><br />
 
             </div>
         </div>
+
         </center>
             }
 
