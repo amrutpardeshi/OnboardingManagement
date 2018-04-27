@@ -33,7 +33,6 @@ namespace OnboardingManagement.Controllers
 
         public ActionResult Delete()
         {
-
             return View();
         }
         /// <summary>

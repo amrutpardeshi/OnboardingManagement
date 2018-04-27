@@ -13,14 +13,15 @@ namespace OnboardingManagement.Models
         public int PA_Id { get; set; }
 
         [Index("UniqueConstrain",1, IsUnique = true)]
+        [Required]
         public int O_Id { get; set; }
-
+        [Required]
         [Index("UniqueConstrain", 2, IsUnique = true)]
         public int P_Id { get; set; }
-
+        [Required]
         [Index("UniqueConstrain",3, IsUnique = true)]
         public int M_Id { get; set; }
-
+        [Required]
         [Index("UniqueConstrain", 4, IsUnique = true)]
         public int PA_Rotation_Num { get; set; }
 

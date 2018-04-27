@@ -5,21 +5,19 @@
     @Html.Partial("_Toolbar")
 </div>
 @(Html.Kendo().Grid<OnboardingManagement.Models.ProjectAssignment>()
-      .Name("grid")
+      .Name("id")
       .Columns(columns =>
       {
-          columns.ForeignKey(c => c.O_Id, (System.Collections.IEnumerable)ViewData["Onboarders"], dataFieldText: "O_Name", dataFieldValue: "O_Id");
-          columns.ForeignKey(c => c.P_Id, (System.Collections.IEnumerable)ViewData["Projects"], dataFieldText: "P_Name", dataFieldValue: "P_Id");
-          columns.Bound(c => c.PA_Rotation_Num);
-          columns.ForeignKey(c => c.M_Id, (System.Collections.IEnumerable)ViewData["Mentors"], dataFieldText: "M_Name", dataFieldValue: "M_Id");
-          columns.Bound(c => c.PA_Start_Date);
-          columns.Bound(c => c.PA_End_Date);
-          columns.Command(command => { command.Destroy(); }).Width(180);
+          columns.ForeignKey(c => c.O_Id, (System.Collections.IEnumerable)ViewData["Onboarders"], dataFieldText: "O_Name", dataFieldValue: "O_Id").Title("Onboarder");
+          columns.ForeignKey(c => c.P_Id, (System.Collections.IEnumerable)ViewData["Projects"], dataFieldText: "P_Name", dataFieldValue: "P_Id").Title("Project");
+          columns.Bound(c => c.PA_Rotation_Num).Title("Rotation Number");
+          columns.ForeignKey(c => c.M_Id, (System.Collections.IEnumerable)ViewData["Mentors"], dataFieldText: "M_Name", dataFieldValue: "M_Id").Title("Metor");
+          columns.Bound(c => c.PA_Start_Date).Title("Start Date");
+          columns.Bound(c => c.PA_End_Date).Title("End Date");
       })
       .DataSource(dataSource => dataSource
           .Ajax()
           .Model(model => model.Id(p => p.PA_Id))
           .Read(read => read.Action("ProjectAssignments_Read", "ProjectAssignment"))
-          .Destroy(destroy => destroy.Action("ProjectAssignment_Destroy", "ProjectAssignment"))
       )
 )

@@ -78,63 +78,56 @@ namespace OnboardingManagement.Controllers
 
             return Json(result);
         }
-
-
-        public ActionResult ProjectAssignment_Destroy([DataSourceRequest]DataSourceRequest request, ProjectAssignment projectAssignment)
-        {
-           
-                var entity = new ProjectAssignment
-                {
-                    PA_Id = projectAssignment.PA_Id,
-                    O_Id = projectAssignment.O_Id,
-                    P_Id= projectAssignment.P_Id,
-                    M_Id = projectAssignment.M_Id,
-                    PA_Rotation_Num = projectAssignment.PA_Rotation_Num,
-                    PA_Start_Date = projectAssignment.PA_Start_Date,
-                    PA_End_Date = projectAssignment.PA_End_Date
-
-                };
-
-                db.ProjectAssignments.Attach(entity);
-                db.ProjectAssignments.Remove(entity);
-                db.SaveChanges();
-            
-
-            return Json(new[] { projectAssignment }.ToDataSourceResult(request, ModelState));
-        }
-
+        
         public ActionResult ProjectAssignment_Delete()
         {
             return View();
         }
 
         [HttpPost]
-        public void ProjectAssignment_Delete(int id)
+        public ActionResult ProjectAssignment_Delete1(int id)
         {
+            ProjectAssignment record = db.ProjectAssignments.FirstOrDefault(m => m.PA_Id == id);
+            try
+            {
+                db.ProjectAssignments.Attach(record);
+                db.ProjectAssignments.Remove(record);
+                
+                ViewData["data"] = "Recod Deleted";
+                db.SaveChanges();
+                return Content("<script language='javascript' type='text/javascript'>alert('Record Deleted!');</script>");
 
+            }
+            catch (Exception)
+            {
+            }
+            return View("Index");
         }
 
         [HttpPost]
         public JsonResult ProjectAssignment_Delete_Fetch(string o_id,string rotation_no)
         {
-            int id1 = Int32.Parse(o_id), rotation = Int32.Parse(rotation_no);
-            ProjectAssignment projectAssignmet = db.ProjectAssignments.FirstOrDefault(m => m.O_Id == id1 &&  m.PA_Rotation_Num == rotation);
-            if (projectAssignmet != null)
+            try
             {
-                TempProjectAssignment tpa = new TempProjectAssignment
+                int id1 = Int32.Parse(o_id), rotation = Int32.Parse(rotation_no);
+                ProjectAssignment projectAssignmet = db.ProjectAssignments.FirstOrDefault(m => m.O_Id == id1 && m.PA_Rotation_Num == rotation);
+                if (projectAssignmet != null)
                 {
-                    PA_Id = id1,
-                    Project = db.Projects.Find(projectAssignmet.P_Id),
-                    Onboarder = db.Onboarders.Find(projectAssignmet.O_Id),
-                    Mentor = db.Mentors.Find(projectAssignmet.M_Id),
-                    Psn = projectAssignmet
-                };
-                return Json(tpa, JsonRequestBehavior.AllowGet);
+                    TempProjectAssignment tpa = new TempProjectAssignment
+                    {
+                        PA_Id = id1,
+                        Project = db.Projects.Find(projectAssignmet.P_Id),
+                        Onboarder = db.Onboarders.Find(projectAssignmet.O_Id),
+                        Mentor = db.Mentors.Find(projectAssignmet.M_Id),
+                        Psn = projectAssignmet
+                    };
+                    return Json(tpa, JsonRequestBehavior.AllowGet);
+                }
             }
-            else
-            {
+            catch (Exception e) {
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
+            return Json(null, JsonRequestBehavior.AllowGet);
         }
     }
     class TempProjectAssignment

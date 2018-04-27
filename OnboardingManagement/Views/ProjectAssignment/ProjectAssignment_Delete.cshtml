@@ -4,9 +4,12 @@
 <div>
     @Html.Partial("_Toolbar")
 </div>
-<div class="form-group">
-    <div class="col-lg-7 col-lg-offset-4">
-        <div class="row">
+<center>
+    <div class="form-group">
+        <h3 style="color:darkblue ;font-style:oblique">Project Assignment Delete </h3><br />
+        <br />
+        <div class="col-lg-6 col-lg-offset-3" style="background-color:lemonchiffon ; border:groove;">
+            <br /><br />
             <div class="col-lg-3">
                 @Html.Label("Select Onboarder:")
             </div>
@@ -24,68 +27,70 @@
                            })
                           .Filter("contains")
                           .HtmlAttributes(new { style = "width: 100%" })
-                          .Events(e=>e.Change("getOnboarderId"))
+                          .Events(e => e.Change("getOnboarderId"))
                 )
-            </div>
-        </div><br />
-        <div class="row">
-            <div class="col-lg-3">
-                @Html.Label("Enter Rotation Number")
-            </div>
-            <div class="col-lg-3">
-                @(Html.Kendo().NumericTextBox()
+            </div><br /><br />
+            <div class="row">
+                <div class="col-lg-3">
+                    @Html.Label("Enter Rotation Number")
+                </div>
+                <div class="col-lg-3">
+                    @(Html.Kendo().NumericTextBox()
                         .Name("PA_Rotation_Num")
                         .Events(e => e.Change("getRotataionNo"))
-                )
-                
-            </div>
-        </div><br />
+                    )
 
-        <div class="row">
-            <div class="col-lg-2">
-                
+                </div>
             </div>
-            <div class="col-lg-3">
-                @(Html.Kendo().Button()
+            <div class="row">
+                <div class="col-md-offset-4 col-lg-3">
+                    @(Html.Kendo().Button()
                     .Name("textButton")
                     .Content("Search")
-                    .Events(e=>e.Click("onClick"))
-                 )
-                    
+                    .Events(e => e.Click("onClick"))
+                    )
+                </div>
+                <br /><br />
             </div>
-        </div><br />
+        </div>
     </div>
-</div>
-<div class="form-group">
-    
-    <div class="row">
-        <div class="col-lg-offset-1 col-md-2">
-            Project Name
-            @Html.Kendo().TextBox().Name("p_name").Enable(false)
-        </div>
-        <div class="col-md-2 ">
-            Onboarder Name
-            @Html.Kendo().TextBox().Name("o_name").Enable(false)
-        </div>
-    
-        <div class="col-md-2">
-            Mentor Name
-            @Html.Kendo().TextBox().Name("m_name").Enable(false)
-        </div>
-        <div class="col-md-2">
-            Rotation Number
-            @Html.Kendo().TextBox().Name("r_no").Enable(false)
-        </div>
-        <div class="col-md-2">
-            @(Html.Kendo().Button().Name("deleteButton").Content("Delete")
+</center>
+<center>
+    <div class="form-group">
+        <div class="col-lg-offset-1 col-lg-10" style="background-color:lemonchiffon ; border:groove;">
+            <br /><br />
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-2">
+                    Project Name
+                    @Html.Kendo().TextBox().Name("p_name").Enable(false)
+                </div>
+                <div class="col-md-2 ">
+                    Onboarder Name
+                    @Html.Kendo().TextBox().Name("o_name").Enable(false)
+                </div>
+
+                <div class="col-md-2">
+                    Mentor Name
+                    @Html.Kendo().TextBox().Name("m_name").Enable(false)
+                </div>
+                <div class="col-md-2">
+                    Rotation Number
+                    @Html.Kendo().TextBox().Name("r_no").Enable(false)
+                </div>
+                <div class="col-md-2">
+                    @(Html.Kendo().Button().Name("deleteButton").Content("Delete")
                     .Events(e => e.Click("onDeleteClick"))
-            )
+                    )
+                </div>
+                <br />
+            </div>
         </div>
     </div>
-</div>
+    @ViewData["data"]
+</center>
 <script>
-     
-    var o_id, o_rotationNo,pa_id;
+
+    var o_id, o_rotationNo, pa_id;
     function getOnboarderId() {
         o_id = this.value();
     }
@@ -94,8 +99,7 @@
         o_rotationNo = this.value();
     }
 
-    function onClick()
-    {
+    function onClick() {
         $.ajax({
             url: "/ProjectAssignment/ProjectAssignment_Delete_Fetch",
             type: "POST",
@@ -117,20 +121,17 @@
         });
     }
 
-    function onDeleteClick()
-    {
+    function onDeleteClick() {
         $.ajax({
-            url: "/ProjectAssignment/ProjectAssignment_Delete",
+            url: "/ProjectAssignment/ProjectAssignment_Delete1",
+           // url: '@Url.Action("ProjectAssignment_Delete1","ProjectAssignment")',
             type: "POST",
-            data: JSON.stringify({ 'pa_id': pa_id }),
+            data: JSON.stringify({ 'id': pa_id }),
             dataType: "json",
-            traditional: true,
+            //traditional: true,
             contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                alert("SUCCESS"+data);
-            },
             error: function (err) {
-                alert("No record found for this onboarder !!!"+err);
+                alert("Record already Deleted!!!" + data);
             }
         });
     }
