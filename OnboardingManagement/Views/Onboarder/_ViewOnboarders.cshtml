@@ -1,20 +1,24 @@
 ﻿@model OnboardingManagement.Models.Onboarder
 
+@{ 
+   // var onbording[] gridColumns = Model..columns.ToArray();
+}
+
 @(Html.Kendo().Grid<OnboardingManagement.Models.Onboarder>()
     .Name("myGrid")
     .Columns(columns =>
     {
         columns.Bound(p => p.O_Id);
         columns.Bound(p => p.O_Name);
-        columns.Bound(p => p.O_Rotation_Num);
+        columns.Bound(p => p.O_Rotation_Num);      
     })
     .Pageable()
-    .Sortable()
-    .Filterable()
+
     .Scrollable()
-    .Groupable()
+
     .DataSource(dataSource => dataSource
         .Ajax()
         .Read(read => read.Action("GetAllOnboarders", "Onboarder"))
+        .Model(model => model.Id(p => p.O_Id))
     )
 )

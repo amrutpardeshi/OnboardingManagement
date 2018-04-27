@@ -41,14 +41,17 @@
             </div>
             @*End of Second coloumn of first row*@
 
-
             <div class="col-sm-4" style="background-color:lavender;min-height:300px;">
                 @Html.Partial("_DeleteOnboarder")
             </div>
 
             @*End of Third colmn of first row*@
-        </div>
+        </div>      
         @*End of first Row*@
+    <div class="row">
+        @Html.Partial("_ViewOnboarders")
+    </div>
+    
     </div>
 
 
@@ -59,7 +62,7 @@
 
 
 
-    @Html.Partial("_ViewOnboarders")
+    
 </div>
 
 @*@(Html.Kendo().Grid<OnboardingManagement.Models.Onboarder>()
