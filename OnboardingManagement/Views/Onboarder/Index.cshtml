@@ -22,56 +22,48 @@
                 alert("An error has occured!!!");
             }
         });          
-    }
-
-  
-    
+    } 
 </script>
-<div class="container-fluid">
-    <h1>OnBoarders</h1>
-    <div class="row">
+<div style="background-color:mintcream">
+    <div class="container-fluid">
+        <h1>OnBoarders</h1>
+        <div class="row">
 
-        @*Add onboarder Form*@
-        <div class="col-sm-4" style="background-color:lemonchiffon;">
-            
-               
+            @*Add onboarder Form*@
+            <div class="col-sm-4" style="background-color:lemonchiffon;min-height:300px;">
                 @Html.Partial("_AddOnboarder")
-            
+            </div>
+            @*End of First Coloumn of first row*@
 
-        </div>
-        @*End of First Coloumn of first row*@
+            @*Update onboarder form*@
+            <div class="col-sm-4" style="background-color:lavenderblush; min-height:300px;">
+                @Html.Partial("_UpdateOnboarder")
+            </div>
+            @*End of Second coloumn of first row*@
 
-        
-        
-        @*Update onboarder form*@
-        <div class="col-sm-4" style="background-color:lavenderblush;">
-        
-            
-           @Html.Partial("_UpdateOnboarder")
+            <div class="col-sm-4" style="background-color:lavender;min-height:300px;">
+                @Html.Partial("_DeleteOnboarder")
+            </div>
 
-
-        </div>
-        @*End of Second coloumn of first row*@
-
-
-        <div class="col-sm-4" style="background-color:lavender;">
-           @Html.Partial("_DeleteOnboarder")
-           
-        </div>
-        @*End of Third colmn of first row*@
+            @*End of Third colmn of first row*@
+        </div>      
+        @*End of first Row*@
+    <div class="row">
+        @Html.Partial("_ViewOnboarders")
     </div>
-    @*End of first Row*@
+    
+    </div>
+
+
+
+
+
+
+
+
+
+    
 </div>
-
-
-
-
-
-
-
-
-
-
 
 @*@(Html.Kendo().Grid<OnboardingManagement.Models.Onboarder>()
           .Name("grid")

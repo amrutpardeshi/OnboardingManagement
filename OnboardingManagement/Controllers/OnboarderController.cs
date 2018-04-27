@@ -14,7 +14,7 @@ namespace OnboardingManagement.Controllers
 {
     public class OnboarderController : Controller
     {
-        private OnboardingManagementDb db = new OnboardingManagementDb();
+        OnboardingManagementDb db = new OnboardingManagementDb();
         public ActionResult Add(Onboarder onboarder) {
             onboarder.O_Rotation_Num = 1;
             db.Onboarders.Add(onboarder);
@@ -46,7 +46,7 @@ namespace OnboardingManagement.Controllers
         {
 
             PopulateReportingManagers();
-            return View(new Onboarder());
+            return View();
         }
 
         /// <summary>
@@ -63,9 +63,18 @@ namespace OnboardingManagement.Controllers
         /// <returns>all onboarders in json</returns>
         public JsonResult GetAllOnboarders()
         {
-            return Json(db.Onboarders.ToList(), JsonRequestBehavior.AllowGet);
+            //OnboardingManagementDb db1 = new OnboardingManagementDb();
+            
+            return Json(db.Onboarders, JsonRequestBehavior.AllowGet);
         }
-        
+
+        public JsonResult GetAllOnboarders1([DataSourceRequest]DataSourceRequest request)
+        {
+            //OnboardingManagementDb db1 = new OnboardingManagementDb();
+            var V = db.Onboarders;
+            return Json(V.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Onboarders_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<Onboarder> onboarders = db.Onboarders;

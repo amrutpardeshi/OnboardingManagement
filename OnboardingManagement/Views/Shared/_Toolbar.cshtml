@@ -42,7 +42,6 @@
                          {
                              menuButtons.Add().Text("View").Id("pa_view");
                              menuButtons.Add().Text("Assign Project").Id("pa_add");
-                             menuButtons.Add().Text("Update Assigned Project").Id("pa_update");
                              menuButtons.Add().Text("Delete Assigned Project").Id("pa_delete");
 
                          });
@@ -122,18 +121,20 @@
 
     function P_AssignHandler(e) {
         if (e.id == "pa_add") {
-            alert("ProjectAssigned: " + e.id + "is clicked");
+            var url = '@Url.Action("Index", "ProjectAssignment")';
+            window.location.href = url;
+          //  alert("ProjectAssigned: " + e.id + "is clicked");
 
         }
         else if (e.id == "pa_view") {
-            alert("ProjectAssigned: " + e.id + "is clicked");
+            var url = '@Url.Action("DisplayAllAssignments", "ProjectAssignment")';
+            window.location.href = url;
         }
 
-        else if (e.id == "pa_update") {
-            alert("ProjectAssigned: " + e.id + "is clicked");
-        }
+      
         else if (e.id == "pa_delete") {
-            alert("ProjectAssigned: " + e.id + "is clicked");
+            var url = '@Url.Action("ProjectAssignment_Delete", "ProjectAssignment")';
+            window.location.href = url;
         }
         else {
             alert("ERROR");
