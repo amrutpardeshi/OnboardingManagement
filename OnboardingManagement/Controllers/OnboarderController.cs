@@ -46,7 +46,7 @@ namespace OnboardingManagement.Controllers
         {
 
             PopulateReportingManagers();
-            return View(new Onboarder());
+            return View();
         }
 
         /// <summary>
@@ -61,13 +61,20 @@ namespace OnboardingManagement.Controllers
         /// To get all onboarders in dropdown list
         /// </summary>
         /// <returns>all onboarders in json</returns>
-        public JsonResult GetAllOnboarders([DataSourceRequest]DataSourceRequest request)
+        public JsonResult GetAllOnboarders()
+        {
+            //OnboardingManagementDb db1 = new OnboardingManagementDb();
+            
+            return Json(db.Onboarders, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetAllOnboarders1([DataSourceRequest]DataSourceRequest request)
         {
             //OnboardingManagementDb db1 = new OnboardingManagementDb();
             var V = db.Onboarders;
             return Json(V.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult Onboarders_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<Onboarder> onboarders = db.Onboarders;
