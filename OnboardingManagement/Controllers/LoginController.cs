@@ -19,25 +19,48 @@ namespace OnboardingManagement.Controllers
         [HttpPost]
         public ActionResult Login(Login_user user)
         {
-            if (IsValid(user))
-            {
+            Login_user usr = Validate(user);
+            if (usr!= null){
                 FormsAuthentication.SetAuthCookie(user.U_Name, false);
-                string data = db.Login.Where(x => x.U_Name == user.U_Name).FirstOrDefault().U_Role;
-                if (data == "Mentor")
+                string role =usr.U_Role;
+                if (role.Equals("Mentor"))
                 {
-                  return   RedirectToAction("MentorView", "Admin");
+                    return RedirectToAction("MentorView", "Admin",new { id=usr.U_Id});
                 }
-                else 
+                else
                 {
-                  return  RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Index", "Admin");
                 }
             }
             else
             {
-               return  RedirectToAction("Login", "Login");
+                return RedirectToAction("Login", "Login");
             }
+
+            //if (IsValid(user))
+            //{
+            //    FormsAuthentication.SetAuthCookie(user.U_Name, false);
+            //    string data = db.Login.Where(x => x.U_Name == user.U_Name).FirstOrDefault().U_Role;
+            //    if (data == "Mentor")
+            //    {
+            //      return   RedirectToAction("MentorView", "Admin");
+            //    }
+            //    else 
+            //    {
+            //      return  RedirectToAction("Index", "Admin");
+            //    }
+            //}
+            //else
+            //{
+            //   return  RedirectToAction("Login", "Login");
+            //}
         }
       
+        private Login_user Validate(Login_user user) {
+            Login_user result = db.Login.ToList().FirstOrDefault(m => m.U_Name == user.U_Name && m.U_Password == user.U_Password);
+            return result;
+        }
+
         private bool IsValid(Login_user user)
         {
            
