@@ -37,23 +37,7 @@ namespace OnboardingManagement.Controllers
                 return RedirectToAction("Login", "Login");
             }
 
-            //if (IsValid(user))
-            //{
-            //    FormsAuthentication.SetAuthCookie(user.U_Name, false);
-            //    string data = db.Login.Where(x => x.U_Name == user.U_Name).FirstOrDefault().U_Role;
-            //    if (data == "Mentor")
-            //    {
-            //      return   RedirectToAction("MentorView", "Admin");
-            //    }
-            //    else 
-            //    {
-            //      return  RedirectToAction("Index", "Admin");
-            //    }
-            //}
-            //else
-            //{
-            //   return  RedirectToAction("Login", "Login");
-            //}
+       
         }
       
         private Login_user Validate(Login_user user) {
@@ -61,20 +45,7 @@ namespace OnboardingManagement.Controllers
             return result;
         }
 
-        private bool IsValid(Login_user user)
-        {
-           
-            Login_user re = db.Login.ToList().FirstOrDefault(m => m.U_Name == user.U_Name && m.U_Password == user.U_Password);
-            if (re != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
 
-        }
 
         public ActionResult LogOut()
         {

@@ -16,14 +16,7 @@
                          items.Add().Type(CommandType.Separator);
                          items.Add().Type(CommandType.Separator);
 
-                         items.Add().Type(CommandType.SplitButton).Text("OnBoarder").Id("OnBoarderButton").Click("OnBoarderHandler").MenuButtons(menuButtons =>
-                         {
-                             menuButtons.Add().Text("View OnBoarder").Id("o_view");
-                             menuButtons.Add().Text("Add OnBoarder").Id("o_add");
-                             menuButtons.Add().Text("Update OnBoarder").Id("o_update");
-                             menuButtons.Add().Text("Delete OnBoarder").Id("o_delete");
-
-                         });
+                         items.Add().Type(CommandType.Button).Text("OnBoarder").Id("OnBoarder").Click("OnBoarderHandler");
 
                          items.Add().Type(CommandType.Separator);
                          items.Add().Type(CommandType.Separator);
@@ -80,23 +73,12 @@
 
 
     function OnBoarderHandler(e) {
-        if (e.id == "o_add") {
-            alert("OnBoarder: " + e.id + "is clicked");
+        if (e.id == "OnBoarder") {
+            var url = '@Url.Action("Index","Onboarder")';
+            window.location.href = url;
 
-        }
-        else if (e.id == "o_view") {
-            alert("OnBoarder: " + e.id + "is clicked");
-        }
-
-        else if (e.id == "o_update") {
-            alert("OnBoarder: " + e.id + "is clicked");
-        }
-        else if (e.id == "o_delete") {
-            alert("OnBoarder: " + e.id + "is clicked");
-        }
-        else {
-            alert("ERROR");
-        }
+       }
+        
     }
 
     function ProjectHandler(e) {

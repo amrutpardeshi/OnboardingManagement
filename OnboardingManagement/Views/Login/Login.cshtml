@@ -2,31 +2,53 @@
 @{
     ViewBag.Title = "Login";
 }
-<h2>Login</h2>
 
 
-<div class="row">
-    <div class="container text-center col-lg-offset-1" >
-        @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { ReturnUrl = Request["ReturnUrl"] }))
-        {
 
-            <div class="container text-center">
-                <div class="form-group  center-block">
+
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post, new { ReturnUrl = Request["ReturnUrl"] }))
+            {
+      <center>
+     <div class="form-group">
+        <h3 style="color:darkblue ;font-style:oblique"> Login</h3><br />
+        <div class="col-lg-6 col-lg-offset-3" style="background-color:lemonchiffon ; border:groove;">
+            <div class="row">
+                <div class="col-lg-3">
+                    <br /><br /><br /><br />
                     @Html.Label("Username")
-                    @Html.Kendo().TextBoxFor(m => @Model.U_Name)
                 </div>
-                <div class="form-group center-block">
+                <div class="col-lg-3">
+                    <br /><br /><br /><br />
+                   @Html.Kendo().TextBoxFor(m => @Model.U_Name)
+                </div>
+                </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <br/>
                     @Html.Label("Password")
+                </div>
+                <div class="col-lg-3">
+                    <br />
                     @Html.Kendo().TextBoxFor(m => @Model.U_Password).HtmlAttributes(new { type = "password" })
                 </div>
-                <input type="hidden" name="ReturnUrl" value="@Request.QueryString["ReturnUrl"]" />
-                <div class="form-group">
-                    <button class="btn btn-lg btn-primary" type="submit">Login</button>
-                </div>
             </div>
-        }
-    </div>
-</div>
+            <div class="row">
+                <div class="col-lg-3">
+                  
+                </div>
+                <input type="hidden" name="ReturnUrl" value="@Request.QueryString["ReturnUrl"]" />
+                <div class="col-lg-3">
+                    <br />
+                    <button class="btn btn-lg btn-primary" type="submit">Login</button>
+
+                </div>
+            </div><br /> 
+     </div></div></center>
+}
+
+
+
 
 
 
