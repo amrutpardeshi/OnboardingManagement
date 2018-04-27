@@ -213,6 +213,7 @@
     <Content Include="Views\Shared\_HeadNavBar.cshtml" />
     <Content Include="Views\Shared\_Toolbar.cshtml" />
     <Content Include="Views\ProjectAssignment\ProjectAssignment_Delete.cshtml" />
+    <Content Include="Views\Project\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Project\Create.cshtml" />

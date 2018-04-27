@@ -25,9 +25,15 @@ namespace OnboardingManagement.Controllers
             return View();
         }
      
-
+       
         public ActionResult Update()
         {
+            return View();
+        }
+
+        public ActionResult Delete()
+        {
+
             return View();
         }
         /// <summary>
@@ -82,13 +88,17 @@ namespace OnboardingManagement.Controllers
                 db.SaveChanges();
                 project.P_Id = entity.P_Id;
 
-                return View();
+                return View("Index");
             }
 
-            return View("/Project/Index");
+            return View();
           
         }
 
+
+        /// <summary>
+        /// To Update the  Project
+        /// </summary>
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Projects_Update([DataSourceRequest]DataSourceRequest request, Project project)
         {
@@ -106,28 +116,24 @@ namespace OnboardingManagement.Controllers
                 db.SaveChanges();
             }
 
-            return Json(new[] { project }.ToDataSourceResult(request, ModelState));
+            return View("Index");
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Projects_Destroy([DataSourceRequest]DataSourceRequest request, Project project)
+        /// <summary>
+        /// To Delete Project Details
+        /// </summary>
+
+        [HttpPost]
+        public ActionResult Delete(String ProjectID)
         {
-            if (ModelState.IsValid)
-            {
-                var entity = new Project
-                {
-                    P_Id = project.P_Id,
-                    P_Name = project.P_Name,
-                    P_Technology = project.P_Technology
-                };
 
-                db.Projects.Attach(entity);
-                db.Projects.Remove(entity);
-                db.SaveChanges();
-            }
-
-            return Json(new[] { project }.ToDataSourceResult(request, ModelState));
+            int pid = Convert.ToInt32(ProjectID);
+            Project project = db.Projects.FirstOrDefault(m => m.P_Id == pid);
+            db.Projects.Remove(project);
+            db.SaveChanges();
+            return View("Index");
         }
+
 
         protected override void Dispose(bool disposing)
         {

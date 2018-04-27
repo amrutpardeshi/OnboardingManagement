@@ -56,7 +56,7 @@
         if (e.id == "m_add")
         {
             var url = '@Url.Action("testView","Admin")';
-             window.location.href = url;
+            window.location.href = url;
 
         }
         else if (e.id == "m_view")
@@ -81,7 +81,7 @@
 
     function OnBoarderHandler(e) {
         if (e.id == "o_add") {
-             alert("OnBoarder: " + e.id + "is clicked");
+            alert("OnBoarder: " + e.id + "is clicked");
 
         }
         else if (e.id == "o_view") {
@@ -101,18 +101,19 @@
 
     function ProjectHandler(e) {
         if (e.id == "p_add") {
-            alert("Project: " + e.id + "is clicked");
+
+            window.location.href = "/Project/Create";
 
         }
         else if (e.id == "p_view") {
-            alert("Project: " + e.id + "is clicked");
+             window.location.href = "/Project/Index";
         }
 
         else if (e.id == "p_update") {
-            alert("Project: " + e.id + "is clicked");
+            window.location.href = "/Project/Update";
         }
         else if (e.id == "p_delete") {
-            alert("Project: " + e.id + "is clicked");
+            window.location.href = "/Project/Delete";
         }
         else {
             alert("ERROR");
@@ -131,7 +132,7 @@
             window.location.href = url;
         }
 
-      
+
         else if (e.id == "pa_delete") {
             var url = '@Url.Action("ProjectAssignment_Delete", "ProjectAssignment")';
             window.location.href = url;
