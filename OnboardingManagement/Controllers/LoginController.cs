@@ -61,20 +61,7 @@ namespace OnboardingManagement.Controllers
             return result;
         }
 
-        private bool IsValid(Login_user user)
-        {
-           
-            Login_user re = db.Login.ToList().FirstOrDefault(m => m.U_Name == user.U_Name && m.U_Password == user.U_Password);
-            if (re != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
 
-        }
 
         public ActionResult LogOut()
         {
