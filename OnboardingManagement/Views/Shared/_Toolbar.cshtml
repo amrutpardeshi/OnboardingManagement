@@ -101,18 +101,16 @@
 
     function ProjectHandler(e) {
         if (e.id == "p_add") {
-     
+
             window.location.href = "/Project/Create";
 
         }
         else if (e.id == "p_view") {
-            @*var url = @Url.Action("Index", "Project");
-            window.location.href = url;*@
+             window.location.href = "/Project/Index";
         }
 
         else if (e.id == "p_update") {
-            @*var url = @Url.Action("Update", "Project");
-            window.location.href = url;*@
+            window.location.href = "/Project/Update";
         }
         else if (e.id == "p_delete") {
             alert("Project: " + e.id + "is clicked");
@@ -134,7 +132,7 @@
             window.location.href = url;
         }
 
-      
+
         else if (e.id == "pa_delete") {
             var url = '@Url.Action("ProjectAssignment_Delete", "ProjectAssignment")';
             window.location.href = url;
