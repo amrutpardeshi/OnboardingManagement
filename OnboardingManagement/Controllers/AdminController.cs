@@ -14,9 +14,9 @@ namespace OnboardingManagement.Controllers
         OnboardingManagementDb db = new OnboardingManagementDb();
         [Authorize(Roles ="Admin")]
         // GET: Home
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
-            ViewBag.id = id;
+           
             return View();
         }
 
@@ -45,9 +45,8 @@ namespace OnboardingManagement.Controllers
 
         public JsonResult GetOnboardersForMentor([DataSourceRequest]DataSourceRequest request, int id)
         {
+           
             
-            String MentorName = db.Mentors.FirstOrDefault(m => m.M_Id == id).M_Name;
-            ViewBag.MentorName = MentorName;
 
             DateTime today = DateTime.Now;
             List<ProjectAssignment> projects = db.ProjectAssignments
@@ -86,10 +85,11 @@ namespace OnboardingManagement.Controllers
 
 
         [Authorize]
-        public ActionResult MentorView()
+        public ActionResult MentorView(int id)
         {
-            
-
+            ViewBag.id = id;
+            Mentor mentor = db.Mentors.FirstOrDefault(m => m.M_Id == id);
+            ViewBag.MentorName = mentor.M_Name;
 
             return View();
         }
