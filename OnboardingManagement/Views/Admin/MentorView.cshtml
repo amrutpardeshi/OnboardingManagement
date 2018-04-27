@@ -6,4 +6,27 @@
     @Html.Partial("_HeadNavBar")
 </div>
 <h2>MentorView</h2>
+<h3><b>Welcome @ViewBag.MentorName</b></h3>
+@(Html.Kendo().Grid<OnboardingManagement.Models.OnBoarderDetailModel>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.OnboarderId);
+        columns.Bound(p => p.Name);
+        columns.Bound(p => p.Rotation1);
+        columns.Bound(p => p.Rotation2);
+        columns.Bound(p => p.Rotation3);
+        columns.Bound(p => p.Rotation4);
 
+    })
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    .Filterable()
+    .HtmlAttributes(new { style = "height:550px;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Read(read => read.Action("GetOnboardersForMentor", "Admin").Data("{ id: 4}")))
+     )
+)
