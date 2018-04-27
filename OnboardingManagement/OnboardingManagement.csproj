@@ -198,7 +198,6 @@
     <Content Include="Views\ReportingManager\Index.cshtml" />
     <Content Include="Views\Onboarder\Index.cshtml" />
     <Content Include="Views\ProjectAssignment\Index.cshtml" />
-    <Content Include="Views\ProjectAssignment\Create.cshtml" />
     <Content Include="Views\ReportingManager\Test.cshtml" />
     <Content Include="Views\Onboarder\_AddOnboarder.cshtml" />
     <Content Include="Views\Onboarder\_UpdateOnBoarder.cshtml" />
@@ -212,6 +211,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\_HeadNavBar.cshtml" />
     <Content Include="Views\Shared\_Toolbar.cshtml" />
+    <Content Include="Views\ProjectAssignment\ProjectAssignment_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Project\Create.cshtml" />
