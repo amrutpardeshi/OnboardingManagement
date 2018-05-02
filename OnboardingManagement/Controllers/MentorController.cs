@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -29,7 +29,8 @@ namespace OnboardingManagement.Controllers
         public ActionResult Mentors_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<Mentor> mentors = db.Mentors;
-            DataSourceResult result = mentors.ToDataSourceResult(request, mentor => new {
+            DataSourceResult result = mentors.ToDataSourceResult(request, mentor => new
+            {
                 M_Id = mentor.M_Id,
                 M_Name = mentor.M_Name
             });
@@ -46,10 +47,28 @@ namespace OnboardingManagement.Controllers
                 {
                     M_Name = mentor.M_Name
                 };
-
                 db.Mentors.Add(entity);
                 db.SaveChanges();
                 mentor.M_Id = entity.M_Id;
+                try
+                {
+                    var User_Entity = new Login_user
+                    {
+                        M_Id = mentor.M_Id,
+                        U_Name = mentor.M_Name,
+                        U_Role = "Mentor",
+                        U_Password = mentor.M_Name,
+                    };
+                    db.Login.Add(User_Entity);
+                    db.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+
+                }
+
+
             }
 
             return Json(new[] { mentor }.ToDataSourceResult(request, ModelState));
