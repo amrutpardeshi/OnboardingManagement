@@ -18,9 +18,9 @@ namespace OnboardingManagement.Controllers
         OnboardingManagementDb db = new OnboardingManagementDb();
         [Authorize(Roles = "Admin")]
         public ActionResult Add(Onboarder onboarder) {
-            if (onboarder.O_Name.Equals(""))
+            if (onboarder.O_Name==null)
             {
-                ViewBag.msg = "Name is compulsory!!!";
+                ViewBag.msg = "*Name is compulsory!!!";
                 return View("Index");
             }
             onboarder.O_Rotation_Num = 1;
@@ -31,6 +31,11 @@ namespace OnboardingManagement.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Update(String onboardId, String Onboard_Name, String ReportingManagerID) {
+            if (Onboard_Name .Equals(""))
+            {
+                ViewBag.msg = "*Name is compulsory!!!";
+                return View("Index");
+            }
             int oid = Convert.ToInt32(onboardId);
             Onboarder onboarder = db.Onboarders.FirstOrDefault(m => m.O_Id == oid);
             onboarder.RM_Id = Convert.ToInt32(ReportingManagerID);
