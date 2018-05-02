@@ -104,19 +104,19 @@
 
     function P_AssignHandler(e) {
         if (e.id == "pa_add") {
-            var url = '@Url.Action("Index", "ProjectAssignment")';
+            var url = '@Url.Action("Create", "ProjectAssignment")';
             window.location.href = url;
           //  alert("ProjectAssigned: " + e.id + "is clicked");
 
         }
         else if (e.id == "pa_view") {
-            var url = '@Url.Action("DisplayAllAssignments", "ProjectAssignment")';
+            var url = '@Url.Action("Index", "ProjectAssignment")';
             window.location.href = url;
         }
 
 
         else if (e.id == "pa_delete") {
-            var url = '@Url.Action("ProjectAssignment_Delete", "ProjectAssignment")';
+            var url = '@Url.Action("Delete", "ProjectAssignment")';
             window.location.href = url;
         }
         else {
