@@ -3,11 +3,7 @@
                       .Name("ToolBar")
                      .Items(items =>
                      {
-                         items.Add().Type(CommandType.Separator);
-                         items.Add().Type(CommandType.Button).Text("Mentor").Id("Mentor").Click("MentorHandler");
-
-                         items.Add().Type(CommandType.Separator);
-                         items.Add().Type(CommandType.Separator);
+                         
 
                          items.Add().Type(CommandType.Button).Text("OnBoarder").Id("OnBoarder").Click("OnBoarderHandler");
 
@@ -31,6 +27,11 @@
                              menuButtons.Add().Text("Delete Assigned Project").Id("pa_delete");
 
                          });
+                         items.Add().Type(CommandType.Separator);
+
+                         items.Add().Type(CommandType.Separator);
+                         items.Add().Type(CommandType.Button).Text("Mentor").Id("Mentor").Click("MentorHandler");
+
                      })
     )
 
@@ -73,7 +74,7 @@
             window.location.href = "/Project/Delete";
         }
         else {
-            alert("ERROR");
+            
         }
     }
 
@@ -95,7 +96,7 @@
             window.location.href = url;
         }
         else {
-            alert("ERROR");
+           
         }
     }
 </script>
