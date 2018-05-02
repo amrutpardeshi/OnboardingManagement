@@ -14,6 +14,7 @@ namespace OnboardingManagement.Controllers
         private OnboardingManagementDb db = new OnboardingManagementDb();
         public ActionResult Index()
         {
+            PopulateForeignKeys();
             return View();
         }
 
@@ -40,13 +41,13 @@ namespace OnboardingManagement.Controllers
                 db.SaveChanges();
                 projectAssignments.PA_Id = entity.PA_Id;
                 ViewBag.msg = "Assigned";
-                return View("Index");
+                return View("Create");
 
             }
             catch (Exception e1)
             {
                 ViewBag.msg = "Assignment of same project to onboarder";
-                return View("Index");
+                return View("Create");
             }
         }
         public void PopulateForeignKeys()
@@ -54,12 +55,6 @@ namespace OnboardingManagement.Controllers
             ViewData["Projects"] = db.Projects;
             ViewData["Onboarders"] = db.Onboarders;
             ViewData["Mentors"] = db.Mentors;
-        }
-
-        public ActionResult DisplayAllAssignments()
-        {
-            PopulateForeignKeys();
-            return View();
         }
 
         public ActionResult ProjectAssignments_Read([DataSourceRequest]DataSourceRequest request)
@@ -78,30 +73,32 @@ namespace OnboardingManagement.Controllers
 
             return Json(result);
         }
-        
-        public ActionResult ProjectAssignment_Delete()
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
+
+        public ActionResult Delete()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult ProjectAssignment_Delete1(int id)
+        public ActionResult Delete(int id)
         {
-            ProjectAssignment record = db.ProjectAssignments.FirstOrDefault(m => m.PA_Id == id);
-            try
+             try
             {
-                db.ProjectAssignments.Attach(record);
+                ProjectAssignment record = db.ProjectAssignments.FirstOrDefault(m => m.PA_Id == id);
                 db.ProjectAssignments.Remove(record);
-                
-                ViewData["data"] = "Recod Deleted";
                 db.SaveChanges();
-                return Content("<script language='javascript' type='text/javascript'>alert('Record Deleted!');</script>");
-
+                return JavaScript("<script>alert('Record Deleted')</script>");
+                //return View("Delete");
             }
-            catch (Exception)
+            catch (Exception e)
             {
             }
-            return View("Index");
+            return View("Delete");
         }
 
         [HttpPost]

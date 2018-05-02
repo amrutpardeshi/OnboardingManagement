@@ -199,13 +199,13 @@
     <Content Include="Views\Mentor\Index.cshtml" />
     <Content Include="Views\ReportingManager\Index.cshtml" />
     <Content Include="Views\Onboarder\Index.cshtml" />
-    <Content Include="Views\ProjectAssignment\Index.cshtml" />
+    <Content Include="Views\ProjectAssignment\Create.cshtml" />
     <Content Include="Views\ReportingManager\Test.cshtml" />
     <Content Include="Views\Onboarder\_AddOnboarder.cshtml" />
     <Content Include="Views\Onboarder\_UpdateOnBoarder.cshtml" />
     <Content Include="Views\Onboarder\_DeleteOnboarder.cshtml" />
     <Content Include="Views\Onboarder\_ViewOnboarders.cshtml" />
-    <Content Include="Views\ProjectAssignment\DisplayAllAssignments.cshtml" />
+    <Content Include="Views\ProjectAssignment\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\MentorView.cshtml" />
     <Content Include="Views\Admin\MView.cshtml" />
@@ -213,7 +213,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\_HeadNavBar.cshtml" />
     <Content Include="Views\Shared\_Toolbar.cshtml" />
-    <Content Include="Views\ProjectAssignment\ProjectAssignment_Delete.cshtml" />
+    <Content Include="Views\ProjectAssignment\Delete.cshtml" />
     <Content Include="Views\Project\Delete.cshtml" />
     <Content Include="Views\TestMentor\Index.cshtml" />
     <Content Include="Views\TestMentor\Create.cshtml" />
