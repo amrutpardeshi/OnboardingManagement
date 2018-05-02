@@ -15,8 +15,9 @@
                 //alert(JSON.stringify(data))
                 debugger
                 $("#onboardId").val(data.O_Id).change();
-
+              //  alert(JSON.stringify(data));            
                 $("#Onboard_Name").val(data.O_Name);
+                $("#ReportingManagerID").data("kendoDropDownList").select(data.RM_Id - 1)
 
             },
             error: function () {
