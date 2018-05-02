@@ -12,25 +12,26 @@ using OnboardingManagement.Models;
 
 namespace OnboardingManagement.Controllers
 {
-    public class ProjectController : Controller
+     public class ProjectController : Controller
     {
         private OnboardingManagementDb db = new OnboardingManagementDb();
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View();
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
-     
-       
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Update()
         {
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete()
         {
             return View();
@@ -98,6 +99,7 @@ namespace OnboardingManagement.Controllers
         /// <summary>
         /// To Update the  Project
         /// </summary>
+        [Authorize(Roles = "Admin")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Projects_Update([DataSourceRequest]DataSourceRequest request, Project project)
         {
@@ -121,7 +123,7 @@ namespace OnboardingManagement.Controllers
         /// <summary>
         /// To Delete Project Details
         /// </summary>
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Delete(String ProjectID)
         {

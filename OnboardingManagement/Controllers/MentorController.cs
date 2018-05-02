@@ -15,7 +15,7 @@ namespace OnboardingManagement.Controllers
     public class MentorController : Controller
     {
         private OnboardingManagementDb db = new OnboardingManagementDb();
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View();
@@ -25,7 +25,7 @@ namespace OnboardingManagement.Controllers
         {
             return Json(db.Mentors.ToList(), JsonRequestBehavior.AllowGet);
         }
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Mentors_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<Mentor> mentors = db.Mentors;
@@ -37,7 +37,7 @@ namespace OnboardingManagement.Controllers
 
             return Json(result);
         }
-
+        [Authorize(Roles = "Admin")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Mentors_Create([DataSourceRequest]DataSourceRequest request, Mentor mentor)
         {
@@ -73,7 +73,7 @@ namespace OnboardingManagement.Controllers
 
             return Json(new[] { mentor }.ToDataSourceResult(request, ModelState));
         }
-
+        [Authorize(Roles = "Admin")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Mentors_Update([DataSourceRequest]DataSourceRequest request, Mentor mentor)
         {
@@ -92,7 +92,7 @@ namespace OnboardingManagement.Controllers
 
             return Json(new[] { mentor }.ToDataSourceResult(request, ModelState));
         }
-
+        [Authorize(Roles = "Admin")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Mentors_Destroy([DataSourceRequest]DataSourceRequest request, Mentor mentor)
         {

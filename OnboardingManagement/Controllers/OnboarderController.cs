@@ -12,15 +12,18 @@ using OnboardingManagement.Models;
 
 namespace OnboardingManagement.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class OnboarderController : Controller
     {
         OnboardingManagementDb db = new OnboardingManagementDb();
+        [Authorize(Roles = "Admin")]
         public ActionResult Add(Onboarder onboarder) {
             onboarder.O_Rotation_Num = 1;
             db.Onboarders.Add(onboarder);
             db.SaveChanges();
             return View("Index");
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Update(String onboardId, String Onboard_Name, String ReportingManagerID) {
             int oid = Convert.ToInt32(onboardId);
@@ -31,6 +34,7 @@ namespace OnboardingManagement.Controllers
 
             return View("Index");
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(String OnboardID)
         {
 
@@ -41,7 +45,7 @@ namespace OnboardingManagement.Controllers
             return View("Index");
         }
 
-        
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
 
