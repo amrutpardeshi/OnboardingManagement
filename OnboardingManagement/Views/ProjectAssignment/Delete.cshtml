@@ -123,8 +123,7 @@
 
     function onDeleteClick() {
         $.ajax({
-            url: "/ProjectAssignment/ProjectAssignment_Delete1",
-           // url: '@Url.Action("ProjectAssignment_Delete1","ProjectAssignment")',
+            url: "/ProjectAssignment/Delete",
             type: "POST",
             data: JSON.stringify({ 'id': pa_id }),
             dataType: "json",

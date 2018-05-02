@@ -1,0 +1,143 @@
+﻿@model OnboardingManagement.Models.ProjectAssignment
+<div>
+    @Html.Partial("_HeadNavBar")
+</div>
+<div>
+    @Html.Partial("_Toolbar")
+</div>
+@using (Html.BeginForm("Create", "ProjectAssignment", FormMethod.Post))
+{
+    <center>
+        <div class="form-group">
+
+            <h3 style="color:darkblue ;font-style:oblique">Project Add</h3><br />
+            <br />
+            <div class="col-lg-6 col-lg-offset-3" style="background-color:lemonchiffon ; border:groove;">
+                <br /><br />
+                <div class="row">
+                    <div class="col-lg-4">
+                        @Html.Label("Select Project:")
+                    </div>
+                    <div class="col-lg-4">
+                        @(Html.Kendo().DropDownListFor(p => Model.P_Id)
+                           .Name("P_Id")
+                           .DataTextField("P_Name")
+                           .DataValueField("P_Id")
+                           .DataSource(source =>
+                           {
+                               source.Read(read =>
+                               {
+                                   read.Action("GetAllProjects", "Project");
+                               });
+                           })
+                          .Filter("contains")
+                          .HtmlAttributes(new { style = "width: 100%" })
+                        )
+                    </div>
+                </div><br />
+                <!--End of first row-->
+                <div class="row">
+                    <div class="col-lg-4">
+                        @Html.Label("Select Onboarder:")
+                    </div>
+                    <div class="col-lg-4">
+                        @(Html.Kendo().DropDownListFor(p => Model.O_Id)
+                           .Name("O_Id")
+                           .DataTextField("O_Name")
+                           .DataValueField("O_Id")
+                           .DataSource(source =>
+                           {
+                               source.Read(read =>
+                               {
+                                   read.Action("GetAllOnboarders", "Onboarder");
+                               });
+                           })
+                          .Filter("contains")
+                          .HtmlAttributes(new { style = "width: 100%" })
+                        )
+                    </div>
+                </div><br />
+                <!--End of second row-->
+                <div class="row">
+                    <div class="col-lg-4">
+                        @Html.Label("Select Mentor:")
+                    </div>
+                    <div class="col-lg-4">
+                        @(Html.Kendo().DropDownListFor(p => Model.M_Id)
+                           .Name("M_Id")
+                           .DataTextField("M_Name")
+                           .DataValueField("M_Id")
+                           .DataSource(source =>
+                           {
+                               source.Read(read =>
+                               {
+                                   read.Action("GetAllMentors", "Mentor");
+                               });
+                           })
+                          .Filter("contains")
+                          .HtmlAttributes(new { style = "width: 100%" })
+                        )
+                    </div>
+                </div><br />
+                <!--End of third row-->
+                <div class="row">
+                    <div class="col-lg-4">
+                        @Html.Label("Enter Rotation Number")
+                    </div>
+                    <div class="col-lg-4">
+                        @(Html.Kendo().NumericTextBoxFor(p => Model.PA_Rotation_Num)
+                        .Name("PA_Rotation_Num").Min(1).Max(4)
+                        )
+                    </div>
+                </div><br />
+                <!--End of fourth row-->
+                <div class="row">
+                    <div class="col-lg-4">
+                        @Html.Label("Enter Start Date")
+                    </div>
+                    <div class="col-lg-4">
+                        @(Html.Kendo().DatePickerFor(p => Model.PA_Start_Date)
+                        .Name("PA_Start_Date")
+                        )
+                    </div>
+                </div><br />
+                <!--End of fifth row-->
+                <div class="row">
+                    <div class="col-lg-4">
+                        @Html.Label("Enter End Date")
+                    </div>
+                    <div class="col-lg-4">
+                        @(Html.Kendo().DatePickerFor(p => Model.PA_End_Date)
+                        .Name("PA_End_Date")
+                        )
+                    </div>
+                </div><br />
+                <!--End of sixth row-->
+                <div class="row">
+                    <div class="col-lg-4">
+
+                    </div>
+                    <div class="col-lg-4">
+                        <button class="btn btn-lg btn-primary" type="submit">Create</button>
+                    </div>
+                </div><br />@ViewBag.msg
+            </div>
+        </div>
+    </center>
+}
+
+
+@*@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.UserName)
+            @Html.Kendo().TextBoxFor(m => @Model.UserName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.PassWord)
+            @Html.Kendo().TextBoxFor(m => @Model.PassWord).HtmlAttributes(new { type = "password" })
+        </div>
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary" type="submit">Login</button>
+        </div>
+    }*@
