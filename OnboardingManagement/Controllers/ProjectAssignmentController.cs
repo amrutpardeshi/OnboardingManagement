@@ -9,20 +9,22 @@ using System.Web.Mvc;
 
 namespace OnboardingManagement.Controllers
 {
+   
     public class ProjectAssignmentController : Controller
     {
         private OnboardingManagementDb db = new OnboardingManagementDb();
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             PopulateForeignKeys();
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Create([DataSourceRequest]DataSourceRequest request, ProjectAssignment projectAssignments)
         {
@@ -78,12 +80,12 @@ namespace OnboardingManagement.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete()
         {
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Delete(int id)
         {

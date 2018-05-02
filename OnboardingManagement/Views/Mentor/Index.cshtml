@@ -1,4 +1,10 @@
-﻿@(Html.Kendo().Grid<OnboardingManagement.Models.Mentor>()
+﻿<div>
+    @Html.Partial("_HeadNavBar")
+</div>
+<div>
+    @Html.Partial("_Toolbar")
+</div>
+@(Html.Kendo().Grid<OnboardingManagement.Models.Mentor>()
       .Name("grid")
       .Columns(columns =>
       {
@@ -21,16 +27,3 @@
       )
 )
 
-@*@(Html.Kendo().Grid<OnboardingManagement.Models.Mentor>()
-      .Name("grid")
-      .Columns(columns =>
-      {
-          columns.Bound(c => c.M_Name).Width(180);
-      })
-      .Pageable()
-      .DataSource(dataSource => dataSource
-          .Ajax()
-          .Model(model => model.Id(p => p.M_Id))
-          .Read(read => read.Action("GetMentors", "Mentor"))
-      )
-)*@

@@ -4,14 +4,7 @@
                      .Items(items =>
                      {
                          items.Add().Type(CommandType.Separator);
-                         items.Add().Type(CommandType.SplitButton).Text("Mentor").Id("MentorButton").Click("MentorHandler").MenuButtons(menuButtons =>
-                         {
-                             menuButtons.Add().Text("View Mentor").Id("m_view");
-                             menuButtons.Add().Text("Add Mentor").Id("m_add");
-                             menuButtons.Add().Text("Update Mentor").Id("m_update");
-                             menuButtons.Add().Text("Delete Mentor").Id("m_delete");
-
-                         });
+                         items.Add().Type(CommandType.Button).Text("Mentor").Id("Mentor").Click("MentorHandler");
 
                          items.Add().Type(CommandType.Separator);
                          items.Add().Type(CommandType.Separator);
@@ -46,28 +39,10 @@
 <script>
     function MentorHandler(e)
     {
-        if (e.id == "m_add")
+        if (e.id == "Mentor")
         {
-            var url = '@Url.Action("testView","Admin")';
+            var url = '@Url.Action("Index","Mentor")';
             window.location.href = url;
-
-        }
-        else if (e.id == "m_view")
-        {
-            var url = '@Url.Action("MView","Admin")';
-            window.location.href = url;
-        }
-
-        else if (e.id == "m_update") {
-            var url = '@Url.Action("MView","Admin")';
-            window.location.href = url;
-        }
-        else if (e.id == "m_delete") {
-            alert("Mentor: " + e.id + "is clicked");
-        }
-        else
-        {
-            alert("ERROR");
         }
     }
 
@@ -104,19 +79,19 @@
 
     function P_AssignHandler(e) {
         if (e.id == "pa_add") {
-            var url = '@Url.Action("Index", "ProjectAssignment")';
+            var url = '@Url.Action("Create", "ProjectAssignment")';
             window.location.href = url;
           //  alert("ProjectAssigned: " + e.id + "is clicked");
 
         }
         else if (e.id == "pa_view") {
-            var url = '@Url.Action("DisplayAllAssignments", "ProjectAssignment")';
+            var url = '@Url.Action("Index", "ProjectAssignment")';
             window.location.href = url;
         }
 
 
         else if (e.id == "pa_delete") {
-            var url = '@Url.Action("ProjectAssignment_Delete", "ProjectAssignment")';
+            var url = '@Url.Action("Delete", "ProjectAssignment")';
             window.location.href = url;
         }
         else {
