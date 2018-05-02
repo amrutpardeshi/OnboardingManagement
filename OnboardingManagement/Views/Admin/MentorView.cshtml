@@ -1,11 +1,6 @@
-﻿
-@{
-    ViewBag.Title = "MentorView";
-}
-<div>
+﻿<div>
     @Html.Partial("_HeadNavBar")
 </div>
-<h2>MentorView</h2>
 <h3><b>Welcome @ViewBag.MentorName </b></h3>
 @(Html.Kendo().Grid<OnboardingManagement.Models.OnBoarderDetailModel>()
     .Name("grid")
