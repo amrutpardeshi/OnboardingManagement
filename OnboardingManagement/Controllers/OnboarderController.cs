@@ -16,6 +16,11 @@ namespace OnboardingManagement.Controllers
     {
         OnboardingManagementDb db = new OnboardingManagementDb();
         public ActionResult Add(Onboarder onboarder) {
+            if (onboarder.O_Name.Equals(""))
+            {
+                ViewBag.msg = "Name is compulsory!!!";
+                return View("Index");
+            }
             onboarder.O_Rotation_Num = 1;
             db.Onboarders.Add(onboarder);
             db.SaveChanges();

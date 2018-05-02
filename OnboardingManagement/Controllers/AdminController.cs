@@ -45,17 +45,19 @@ namespace OnboardingManagement.Controllers
 
         public JsonResult GetOnboardersForMentor([DataSourceRequest]DataSourceRequest request, int id)
         {
-           
-            
-
             DateTime today = DateTime.Now;
             List<ProjectAssignment> projects = db.ProjectAssignments
-                                                 .Where(m => m.PA_Start_Date < today && m.PA_End_Date > today && m.M_Id == id).ToList(); //Get All Onboarder
-            List<OnBoarderDetailModel> onboarderslist = new List<OnBoarderDetailModel>();
+                                               .Where(m => m.PA_Start_Date < today && m.PA_End_Date > today && m.M_Id == id)
+                                               .ToList(); //Get All Onboarder Who are currently working under mentor
+
+            List<OnBoarderDetailModel> onboarderslist = new List<OnBoarderDetailModel>();  //List of onboarderDetailModel which is to be passed to view
             foreach (ProjectAssignment project in projects)
             {
                 OnBoarderDetailModel model = new OnBoarderDetailModel();
-                List<ProjectAssignment> onboarderProject = db.ProjectAssignments.Where(m => m.O_Id == project.O_Id).ToList();//get all projects of onboarder
+                List<ProjectAssignment> onboarderProject = db.ProjectAssignments
+                                                             .Where(m => m.O_Id == project.O_Id)
+                                                             .ToList();//get all projects of onboarder
+
                 foreach (ProjectAssignment onboarderdetail in onboarderProject)
                 {
                     model.OnboarderId = onboarderdetail.O_Id;
@@ -90,7 +92,6 @@ namespace OnboardingManagement.Controllers
             ViewBag.id = id;
             Mentor mentor = db.Mentors.FirstOrDefault(m => m.M_Id == id);
             ViewBag.MentorName = mentor.M_Name;
-
             return View();
         }
 
