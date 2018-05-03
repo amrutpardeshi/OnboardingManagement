@@ -129,7 +129,7 @@
     </center>
 }
 
-
+<div id="test"></div>
 @*@using (Html.BeginForm("Login", "Login", FormMethod.Post))
     {
         <div class="form-group">
@@ -146,10 +146,30 @@
     }*@
 
 
+
+<div id="window">
+    
+    
+</div> 
+
     <script>
+        var myWindow = $("#window");
+        myWindow.kendoWindow({
+            width: "600px",
+            title: "Suggestions for Assigning project",
+            visible: false,
+            actions: [
+                "Pin",
+                "Minimize",
+                "Maximize",
+                "Close"
+            ],
+            close: onClose
+        }).data("kendoWindow").center();
+
 
         function GetProjectSuggestion() {
-            debugger
+
             var ids = this.value()
             $.ajax({
                 url: "/ProjectAssignment/GetProjectSuggestion/" + ids,
@@ -159,15 +179,26 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     // alert(JSON.stringify(data));
-                    var projects="";
-                    var msg = "<ol>";
-                    for (var i = 0; i < data.length; i++) {
-                        msg = msg + "<li>" + data[i].P_Name + "  --  " + data[i].P_Technology + "  --  </li>";
-                        projects = projects + "  " + data[i].P_Name + "  --  " + data[i].P_Technology + "\n";
-                    }
-                    msg = msg + "</ol>"
+                    var projects = "";
+                    var msg = "<table height=300 width=300>";
+                    msg = msg + "<tr>";
+                    msg = msg + "<th>Project Name</th> <th> Technology</th>";
 
-                    alert(projects)
+                    msg = msg + "</tr>";
+
+                    for (var i = 0; i < data.length; i++) {
+                        msg = msg + "<tr>";
+                        msg = msg + "<td>" + data[i].P_Name + "</td>";
+                        msg = msg + "<td>" + data[i].P_Technology + "</td>";
+                        msg = msg + "</tr>";
+
+                       // msg = msg + "<li>" + data[i].P_Name + "  --  " + data[i].P_Technology + "  --  </li>";
+                      //  projects = projects + "  " + data[i].P_Name + "  --  " + data[i].P_Technology + "\n";
+                    }
+                    msg = msg + "</table>"
+
+                    $("#window").html(msg);
+                    myWindow.data("kendoWindow").open();
 
 
                 },
@@ -175,10 +206,47 @@
                     alert("An error has occured!!!" + JSON.stringify(err));
                 }
             });
+
+
+
+           
+
         }
-         
+
+        function onClose() {
+
+        }
     </script>
  
+<style>
 
+                #example {
+                    min-height:500px;
+                }
+                #undo {
+                    text-align: center;
+                    position: absolute;
+                    white-space: nowrap;
+                    padding: 1em;
+                    cursor: pointer;
+                }
+                .armchair {
+                	float: left;
+                	margin: 30px 30px 120px 30px;
+                	text-align: center;
+                }
+                .armchair img {
+                    display: block;
+                    margin-bottom: 10px;
+                }
+                .k-window-content a {
+                    color: #BBB;
+                }
+                .k-window-content p {
+                    margin-bottom: 1em;
+                }
+
+             
+</style>
 
 
