@@ -12,9 +12,6 @@ namespace OnboardingManagement.Controllers
    
     public class ProjectAssignmentController : Controller
     {
-
-        
-
         private OnboardingManagementDb db = new OnboardingManagementDb();
         [Authorize(Roles = "Admin")]
         public ActionResult Index()
