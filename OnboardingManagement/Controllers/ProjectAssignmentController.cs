@@ -145,6 +145,31 @@ namespace OnboardingManagement.Controllers
             }
             return Json(null, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult GetRotationNo(int id)
+        {
+            var R_No = 0;
+            var R_No1 = (from onboarder in db.Onboarders
+                        join project in db.ProjectAssignments
+                        on onboarder.O_Id equals project.O_Id
+                        where project.O_Id == id
+                        select project.PA_Rotation_Num
+                         ).ToList();
+
+            var reuslt=db.ProjectAssignments.Where(t => t.O_Id == id).ToList();
+            if (reuslt.Count!=0)
+            {
+              R_No =  reuslt.Max(r => r.PA_Rotation_Num);
+                R_No++;
+
+            }
+            else
+            {
+                R_No = 1 ;
+            }
+            return Json(R_No,JsonRequestBehavior.AllowGet);
+        }
         
     }
     

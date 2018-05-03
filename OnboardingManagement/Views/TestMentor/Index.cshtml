@@ -40,7 +40,28 @@
         <span id="undo" style="display:none" class="k-button hide-on-narrow">Click here to open the dialog</span>
     </div>
     <script>
-    $(document).ready(function () {
+
+        $.ajax({
+            url: "/ProjectAssignment/GetRotationNo/" + 2,
+            type: "GET",
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                alert("   test :  " + JSON.stringify(data));
+
+            },
+            error: function (err) {
+                alert("An error has occured!!!" + JSON.stringify(err));
+            }
+        });
+
+        $(document).ready(function () {
+
+
+
+
+
         var dialog = $('#dialog'),
             undo = $("#undo");
 
