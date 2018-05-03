@@ -7,7 +7,7 @@ using System.Web;
 
 namespace OnboardingManagement.Models
 {
-    public class Project
+    public class Project : IEquatable<Project>
     {
         [Key]
         public int P_Id { get; set; }
@@ -22,5 +22,13 @@ namespace OnboardingManagement.Models
 
         //Foreign Keys
         public ICollection<ProjectAssignment> ProjectAssignments { get; set; }
+
+        public bool Equals(Project other)
+        {
+            if (this.P_Id == other.P_Id && this.P_Technology.Equals(other.P_Technology))
+                return true;
+            else
+                return false;
+        }
     }
 }

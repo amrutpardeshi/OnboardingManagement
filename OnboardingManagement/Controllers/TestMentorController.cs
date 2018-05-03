@@ -16,9 +16,18 @@ namespace OnboardingManagement.Controllers
     {
         OnboardingManagementDb db = new OnboardingManagementDb();
         // GET: TestMentor
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-          
+            var pid = (from onboarder in db.Onboarders
+                            join project in db.ProjectAssignments
+                            on onboarder.O_Id equals project.O_Id
+                            where project.O_Id == id
+                            select project.P_Id
+                         ).ToList();  //Get The list of Project Id on which onboarder already worked
+
+            List<Project> projects = db.Projects.Where(t => pid.Contains(t.P_Id)).ToList(); 
+            List<String> projectTechnology = projects.Select(p=> p.P_Technology).ToList();
+            List<Project> result =db.Projects.Where(t=> !pid.Contains(t.P_Id) && !projectTechnology.Contains(t.P_Technology)).ToList();
             return View();
         }
 

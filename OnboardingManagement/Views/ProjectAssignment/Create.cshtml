@@ -1,4 +1,6 @@
 ﻿@model OnboardingManagement.Models.ProjectAssignment
+<div id="dialog">
+</div>
 <div>
     @Html.Partial("_HeadNavBar")
 </div>
@@ -54,6 +56,7 @@
                            })
                           .Filter("contains")
                           .HtmlAttributes(new { style = "width: 100%" })
+                          .Events(e=> e.Change("GetProjectSuggestion"))
                         )
                     </div>
                 </div><br />
@@ -141,3 +144,41 @@
             <button class="btn btn-lg btn-primary" type="submit">Login</button>
         </div>
     }*@
+
+
+    <script>
+
+        function GetProjectSuggestion() {
+            debugger
+            var ids = this.value()
+            $.ajax({
+                url: "/ProjectAssignment/GetProjectSuggestion/" + ids,
+                type: "GET",
+                dataType: "json",
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    // alert(JSON.stringify(data));
+                    var projects="";
+                    var msg = "<ol>";
+                    for (var i = 0; i < data.length; i++) {
+                        msg = msg + "<li>" + data[i].P_Name + "  --  " + data[i].P_Technology + "  --  </li>";
+                        projects = projects + "  " + data[i].P_Name + "  --  " + data[i].P_Technology + "\n";
+                    }
+                    msg = msg + "</ol>"
+
+                    alert(projects)
+
+
+                },
+                error: function (err) {
+                    alert("An error has occured!!!" + JSON.stringify(err));
+                }
+            });
+        }
+         
+    </script>
+ 
+
+
+

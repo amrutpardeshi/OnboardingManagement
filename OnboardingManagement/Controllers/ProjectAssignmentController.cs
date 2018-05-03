@@ -12,6 +12,9 @@ namespace OnboardingManagement.Controllers
    
     public class ProjectAssignmentController : Controller
     {
+
+        
+
         private OnboardingManagementDb db = new OnboardingManagementDb();
         [Authorize(Roles = "Admin")]
         public ActionResult Index()
@@ -52,6 +55,23 @@ namespace OnboardingManagement.Controllers
                 return View("Create");
             }
         }
+
+        [HttpGet]
+      public  JsonResult GetProjectSuggestion(int id)
+        {
+            var pid = (from onboarder in db.Onboarders
+                       join project in db.ProjectAssignments
+                       on onboarder.O_Id equals project.O_Id
+                       where project.O_Id == id
+                       select project.P_Id
+                         ).ToList();  //Get The list of Project Id on which onboarder already worked
+
+            List<Project> projects = db.Projects.Where(t => pid.Contains(t.P_Id)).ToList();
+            List<String> projectTechnology = projects.Select(p => p.P_Technology).ToList();
+            List<Project> result = db.Projects.Where(t => !pid.Contains(t.P_Id) && !projectTechnology.Contains(t.P_Technology)).ToList();
+            return Json(result,JsonRequestBehavior.AllowGet);
+        }
+
         public void PopulateForeignKeys()
         {
             ViewData["Projects"] = db.Projects;
@@ -128,7 +148,9 @@ namespace OnboardingManagement.Controllers
             }
             return Json(null, JsonRequestBehavior.AllowGet);
         }
+        
     }
+    
     class TempProjectAssignment
     {
         public int PA_Id { get; set; }
