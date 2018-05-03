@@ -131,9 +131,21 @@
 
 
 <div id="window">
+    <div id="grid"></div>
 </div>
 
 <script>
+    function onChange(arg) { 
+        var selected = $.map(this.select(), function (item) {
+            return $(item).text();
+        }); 
+        var projectid = selected.join("tr");
+        var id = projectid[0] + projectid[1]
+        alert(id);
+        
+
+    }
+
     var myWindow = $("#window");
     myWindow.kendoWindow({
         width: "600px",
@@ -148,9 +160,9 @@
         close: onClose
     }).data("kendoWindow").center();
 
+   
 
-    function GetProjectSuggestion() {
-
+   function GetProjectSuggestion() {
         var ids = this.value()
         $.ajax({
             url: "/ProjectAssignment/GetProjectSuggestion/" + ids,
@@ -159,6 +171,31 @@
             traditional: true,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
+                
+
+                $("#grid").kendoGrid({
+                    dataSource: data,
+                    selectable: "row",
+                    change: onChange,
+                    height: 350,
+                    columns: [
+                        {
+                            field: "P_Id",
+                            title: "Project Id"
+                        },
+                        {
+                            field: "P_Name",
+                            title: "Name",
+                        },
+                        {
+                            field: "P_Technology",
+                            title: "Technology",
+                        }
+                    ]
+                });
+
+
+
                 // alert(JSON.stringify(data));
                 var projects = "";
                 var msg = "<table height=300 width=300>";
@@ -178,7 +215,7 @@
                 }
                 msg = msg + "</table>"
 
-                $("#window").html(msg);
+              //  $("#window").html(msg);
                 myWindow.data("kendoWindow").open();
 
 
