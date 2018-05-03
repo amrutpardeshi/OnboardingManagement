@@ -152,6 +152,7 @@
     function GetProjectSuggestion() {
 
         var ids = this.value()
+        getRotationNo(ids);
         $.ajax({
             url: "/ProjectAssignment/GetProjectSuggestion/" + ids,
             type: "GET",
@@ -191,6 +192,36 @@
 
 
 
+
+    }
+
+  
+
+    function getRotationNo(id) {
+        debugger
+        var id1 = id;
+        $.ajax({
+           
+            url: "/ProjectAssignment/GetRotationNo/" +id1,
+            type: "GET",
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                
+                alert("   test :  " + JSON.stringify(data));
+                debugger
+               
+
+                var numerictextbox = $("#PA_Rotation_Num").data("kendoNumericTextBox");
+                numerictextbox.value(JSON.stringify(data));
+                
+
+            },
+            error: function (err) {
+                alert("An error has occured!!!" + JSON.stringify(err));
+            }
+        });
 
     }
 
