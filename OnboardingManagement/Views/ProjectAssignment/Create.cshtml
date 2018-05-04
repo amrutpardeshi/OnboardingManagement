@@ -101,6 +101,9 @@
                     <div class="col-lg-4">
                         @(Html.Kendo().DatePickerFor(p => Model.PA_Start_Date)
                         .Name("PA_Start_Date")
+                        .Value(DateTime.Now)
+                        .Culture("es-MX")
+                        .Events(e=> e.Change("change"))
                         )
                     </div>
                 </div><br />
@@ -112,6 +115,8 @@
                     <div class="col-lg-4">
                         @(Html.Kendo().DatePickerFor(p => Model.PA_End_Date)
                         .Name("PA_End_Date")
+                        .Value(DateTime.Now.Date.AddMonths(6))
+                        .Culture("es-MX")
                         )
                     </div>
                 </div><br />
@@ -135,14 +140,47 @@
 </div>
 
 <script>
+    function change() {
+        var date = new Date(this.value());
+        date.setMonth(date.getMonth() + 6);
+        $("#PA_End_Date").data('kendoDatePicker').value(date);
+        
+    }
     function onChange(arg) { 
         var selected = $.map(this.select(), function (item) {
             return $(item).text();
         }); 
         var projectid = selected.join("tr");
         var id = projectid[0] + projectid[1]
-        alert(id);
+
+        $.ajax({
+            url: "/Project/GetAllProjects",
+            type: "GET",
+            dataType: "json",
+            traditional: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+               
+                for (i = 0; i < data.length; i++) {
+                    if (data[i].P_Id == id) {
+
+                        var dropdownlist = $("#P_Id").data("kendoDropDownList");
+                        dropdownlist.select(i);
+                        myWindow.data("kendoWindow").close();
+                       
+                    }
+                }
+            },
+            error: function (err) {
+
+            }
+        });
+
+
+
+
         
+   
 
     }
 
@@ -197,7 +235,8 @@
 
 
 
-                // alert(JSON.stringify(data));
+            
+
                 var projects = "";
                 var msg = "<table height=300 width=300>";
                 msg = msg + "<tr>";
@@ -232,6 +271,29 @@
 
     }
 
+   function GetProjects(id) {
+       $.ajax({
+           url: "/Project/GetAllProjects",
+           type: "GET",
+           dataType: "json",
+           traditional: true,
+           contentType: "application/json; charset=utf-8",
+           success: function (data) {
+               debugger
+
+               for (i = 0; i < data.length; i++) {
+                   if (data[i].P_Id == id) {
+                      
+                       return i + "";
+                   }
+               }
+           },
+           error: function (err) {
+
+           }
+       });
+   }
+
   
 
     function getRotationNo(id) {
@@ -245,11 +307,7 @@
             traditional: true,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                
-                alert("   test :  " + JSON.stringify(data));
-                debugger
-               
-
+                     
                 var numerictextbox = $("#PA_Rotation_Num").data("kendoNumericTextBox");
                 numerictextbox.value(JSON.stringify(data));
                 
